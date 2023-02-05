@@ -14,6 +14,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     args: args,
     waitConfirmations: network.config.blockConfirmations || 1,
   });
+  await fundingContract.wait();
 
   log("-----------------------------");
 };
