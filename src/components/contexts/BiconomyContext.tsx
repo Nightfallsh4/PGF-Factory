@@ -1,6 +1,6 @@
 import SmartAccount from "@biconomy/smart-account"
 import SocialLogin from "@biconomy/web3-auth"
-import { ethers } from "ethers"
+import { ethers } from "ethers-old"
 import { useCallback, useEffect, useState } from "react"
 import { ChainId } from "../../utils/chainConfig"
 import React, {createContext} from "react"

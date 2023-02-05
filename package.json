@@ -19,6 +19,7 @@
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "ethers": "^6.0.2",
+    "ethers-old": "npm:ethers@5.7.2",
     "keccak256": "^1.0.6",
     "merkletreejs": "^0.3.9",
     "next": "13.1.6",
