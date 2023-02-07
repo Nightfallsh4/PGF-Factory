@@ -1,13 +1,16 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("hardhat-deploy");
-require("solidity-coverage");
+// require("solidity-coverage");
+require("@nomiclabs/hardhat-waffle")
 require("@nomiclabs/hardhat-etherscan");
 require("hardhat-gas-reporter");
 require("dotenv").config();
+require('@openzeppelin/hardhat-upgrades');
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.17",
+  solidity: {compilers: [
+    { version: "0.8.17", settings:{optimizer:{enabled:true, runs:75}} }]},
   namedAccounts: {
     deployer: {
       default: 0, // here this will by default take the first account as deployer

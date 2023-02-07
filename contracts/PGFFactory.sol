@@ -4,9 +4,9 @@ pragma solidity ^0.8.7;
 import "./FundingContract.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
-
-contract PGFFactory is AccessControlEnumerableUpgradeable, ReentrancyGuardUpgradeable {
+contract PGFFactory is AccessControlEnumerableUpgradeable, ReentrancyGuardUpgradeable, UUPSUpgradeable{
 
     // State Variable
     uint256 public s_creationFee;
@@ -53,6 +53,8 @@ contract PGFFactory is AccessControlEnumerableUpgradeable, ReentrancyGuardUpgrad
         s_fundingId = 0;
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
+
+    function _authorizeUpgrade(address) internal override onlyRole(DEFAULT_ADMIN_ROLE) {}
 
     // External Function
     function createFunding(uint256 _totalFunding, uint256 _withdrawalFee, uint256 _vestingPeriod,bool _isGroupWithdrawal) external payable isEnoughEther {
