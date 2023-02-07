@@ -19,6 +19,26 @@ contract PGFFactory is AccessControlEnumerableUpgradeable, ReentrancyGuardUpgrad
     bytes32 public constant PAYOUTADDRESS_ROLE = keccak256("PAYOUTADDRESS_ROLE");
     bytes32 public constant CREATIONFEE_ROLE = keccak256("CREATIONFEE_ROLE");
 
+    // Events
+    event FundingCreated (
+        address indexed contractAddress,
+        uint256 indexed totalFunding,
+        uint256 indexed vestingPeriod,
+        uint256 withdrawalFee
+    );
+
+    event Withdrawed (
+        address indexed payoutAddress,
+        uint256 indexed amount
+    );
+
+    event CreationFeeChanged (
+        uint256 indexed newCreationFee
+    );
+
+    event PayoutAddressChanged (
+        address indexed newPayoutAddress
+    );
 
 
     // Modifiers
@@ -35,27 +55,33 @@ contract PGFFactory is AccessControlEnumerableUpgradeable, ReentrancyGuardUpgrad
     }
 
     // External Function
-    function createFunding(uint256 totalFunding, uint256 withdrawalFee, uint256 vestingPeriod,bool isGroupWithdrawal) external payable isEnoughEther {
-        FundingContract fundingContract = new FundingContract(totalFunding,withdrawalFee,vestingPeriod,isGroupWithdrawal);
+    function createFunding(uint256 _totalFunding, uint256 _withdrawalFee, uint256 _vestingPeriod,bool _isGroupWithdrawal) external payable isEnoughEther {
+        FundingContract fundingContract = new FundingContract(_totalFunding,_withdrawalFee,_vestingPeriod,_isGroupWithdrawal);
         s_fundingIdToAddress[s_fundingId] = address(fundingContract);
         s_fundingId++;
         s_contractBalance += msg.value;
+        emit FundingCreated(address(fundingContract), _totalFunding, _vestingPeriod, _withdrawalFee);
     }
 
     function withdraw() external nonReentrant {
-        (bool success, ) = payable(s_payoutAddress).call{value:s_contractBalance}("");
+        address payoutAddress = s_payoutAddress;
+        uint256 contractBalance = s_contractBalance;
+        (bool success, ) = payable(payoutAddress).call{value:contractBalance}("");
         require(success,"Withdraw not successfull");
         s_contractBalance = 0;
+        emit Withdrawed(payoutAddress, contractBalance);
     }
 
     // Setter Functions
     function setCreationFee(uint256 _creationFee) external onlyRole(CREATIONFEE_ROLE) {
         s_creationFee = _creationFee;
+        emit CreationFeeChanged(_creationFee);
     }
 
     function setPayoutAddress(address _payoutAddress) external onlyRole(PAYOUTADDRESS_ROLE) {
         require(_payoutAddress != address(0),"Address cant be zero");
         s_payoutAddress = _payoutAddress;
+        emit PayoutAddressChanged(_payoutAddress);
     }
 
     // View Functions
