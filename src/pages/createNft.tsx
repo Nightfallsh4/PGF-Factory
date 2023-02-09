@@ -6,7 +6,7 @@ import { uploadFileToIPFS, uploadJSONToIPFS } from "./pinata";
 // import factory conrtact json
 import { useLocation } from "react-router-dom";
 
-export default function CreateNFT () {
+export default function createnft () {
     const [formParams, updateFormParams] = useState({
       name: '',
       price: '',
