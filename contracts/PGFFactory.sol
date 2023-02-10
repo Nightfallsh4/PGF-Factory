@@ -83,7 +83,7 @@ contract PGFFactory is
         emit FundingCreated(
             address(fundingContract),
             _totalFunding,
-            _vestingPeriod,
+            _vestingPeriodInSeconds,
             _withdrawalFee
         );
     }

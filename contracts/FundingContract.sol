@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/finance/VestingWallet.sol";
+import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 error FundingContract__TransferFailed();
 error FundingContract__NotEnoughETH();
@@ -17,6 +18,8 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     Counters.Counter private _withdrawers;
+
+    //Merkle Tree Addition
 
     // Constant variables
     bytes32 public constant FUNDER_ROLE = keccak256("FUNDER_ROLE");
@@ -86,6 +89,7 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         }
         s_addressToAmountFunded[msg.sender] = msg.value;
         s_funders.push(msg.sender);
+        //Is a valid Merkle Proof needed before this?
         _safeMint(msg.sender, currentTokenId);
         _tokenIds.increment();
 
@@ -145,6 +149,14 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         }
 
         emit FundsWithdrawed(msg.sender, amount);
+    }
+
+    function verifyMerkleTree(
+        bytes32[] calldata proof,
+        bytes32 root
+    ) public view returns (bool) {
+        bytes32 leaf = keccak256(abi.encodePacked(msg.sender));
+        return MerkleProof.verify(proof, root, leaf);
     }
 
     function supportsInterface(
