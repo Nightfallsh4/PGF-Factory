@@ -18,7 +18,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     kind: "uups",
   })
   await deployedProxy.deployed()
-  log(deployedProxy.address)
+  log("PGF Contract Deployed At: ", deployedProxy.address)
   log("-------------------------")
 }
 
