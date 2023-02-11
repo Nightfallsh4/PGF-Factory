@@ -78,6 +78,7 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         _isGroupWithdrawal = isGroupWithdrawal;
         s_startTimestamp = startTimestamp;
         _tokenURI = tokenUri;
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
     function depositFunds() public payable {
@@ -111,6 +112,13 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
 
         release();
 
+        uint256 amountReleased = released();
+
+        (bool success, ) = payable(msg.sender).call{value: amountReleased}("");
+
+        if (!success) {
+            revert FundingContract__TransferFailed();
+        }
         emit ContractorClaimedFunds(msg.sender, released());
     }
 
@@ -124,7 +132,7 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
     // Receive any funds sent to the contract
     receive() external payable override {}
 
-    function withdrawalCheck() public onlyGroupFunding returns (bool) {
+    function withdrawalCheck() public view onlyGroupFunding returns (bool) {
         uint256 numberOfWithdrawers = _withdrawers.current();
         uint256 withdrawalLimit = s_funders.length.mul(60).div(100);
         if (numberOfWithdrawers >= withdrawalLimit) {
@@ -186,11 +194,15 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         return duration();
     }
 
+    function getStartTimestamp() public view returns (uint256) {
+        return s_startTimestamp;
+    }
+
     function getIsGroupWithdrawal() public view returns (bool) {
         return _isGroupWithdrawal;
     }
 
-    function getAddressToAmountFunded(
+    function getAmountFundedByAddress(
         address funder
     ) public view returns (uint256) {
         return s_addressToAmountFunded[funder];
@@ -198,5 +210,17 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
 
     function getFunder(uint256 index) public view returns (address) {
         return s_funders[index];
+    }
+
+    function getTotalFunders() public view returns (uint256) {
+        return s_funders.length;
+    }
+
+    function getTokenCounter() public view returns (uint256) {
+        return _tokenIds.current();
+    }
+
+    function getWithdrawerCounter() public view returns (uint256) {
+        return _withdrawers.current();
     }
 }

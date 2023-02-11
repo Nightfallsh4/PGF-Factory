@@ -8,14 +8,14 @@
     },
     {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0xab8c3f85793041b40b381ac09a6a9ba19e7f43b7c5206a0d08ee6eaa00567dc0",
+      "txHash": "0x0a1b3654ebd4f9bb47b7a82f00c9dc56e5dca5bef113fb863067d9efd826562c",
       "kind": "uups"
     }
   ],
   "impls": {
-    "2f3bbbe811b2e026b484dbbec4bff23a16ea727848abd64a08d8ab2f8529ad69": {
+    "0cf3caa604e7d8ff982ffb38705bfeb6b7f43001cb4a4d299acefe03f8af8ba8": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0x3a8b7cd8792129477aca8743252e5a3d1f298ada1435849df9ebed10cc732f45",
+      "txHash": "0x75cd6659800130ecc11f932d49b60b45de319bf795bc029a7754f8f7b61eacaa",
       "layout": {
         "solcVersion": "0.8.17",
         "storage": [
@@ -122,7 +122,7 @@
             "slot": "351",
             "type": "t_uint256",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:15"
+            "src": "contracts/PGFFactory.sol:47"
           },
           {
             "label": "s_payoutAddress",
@@ -130,7 +130,7 @@
             "slot": "352",
             "type": "t_address",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:16"
+            "src": "contracts/PGFFactory.sol:48"
           },
           {
             "label": "s_fundingId",
@@ -138,7 +138,7 @@
             "slot": "353",
             "type": "t_uint256",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:17"
+            "src": "contracts/PGFFactory.sol:49"
           },
           {
             "label": "s_fundingIdToAddress",
@@ -146,7 +146,7 @@
             "slot": "354",
             "type": "t_mapping(t_uint256,t_address)",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:18"
+            "src": "contracts/PGFFactory.sol:50"
           },
           {
             "label": "s_contractBalance",
@@ -154,7 +154,7 @@
             "slot": "355",
             "type": "t_uint256",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:19"
+            "src": "contracts/PGFFactory.sol:51"
           }
         ],
         "types": {
