@@ -2,20 +2,20 @@
   "manifestVersion": "3.2",
   "proxies": [
     {
-      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0xb9399aea71353da42010c3be342866a779925cc8479239950b49e3d7960451a7",
+      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+      "txHash": "0xbb8af1899b2d5f90f3a7f063dac1322e483f2f4a760e0176bd54aec5a8287b75",
       "kind": "uups"
     },
     {
-      "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0xbb8af1899b2d5f90f3a7f063dac1322e483f2f4a760e0176bd54aec5a8287b75",
+      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "txHash": "0x0a1b3654ebd4f9bb47b7a82f00c9dc56e5dca5bef113fb863067d9efd826562c",
       "kind": "uups"
     }
   ],
   "impls": {
-    "44b1cdc725bf64c77fdfdfbd011a50f9d0eb37ebe71d681fc2254078e36eeb56": {
+    "0cf3caa604e7d8ff982ffb38705bfeb6b7f43001cb4a4d299acefe03f8af8ba8": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0x6fc118a8d5c14854125b3cc62de56aee04f2d426c64b62c544a8bcb8abf01e20",
+      "txHash": "0x75cd6659800130ecc11f932d49b60b45de319bf795bc029a7754f8f7b61eacaa",
       "layout": {
         "solcVersion": "0.8.17",
         "storage": [
@@ -122,7 +122,7 @@
             "slot": "351",
             "type": "t_uint256",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:12"
+            "src": "contracts/PGFFactory.sol:47"
           },
           {
             "label": "s_payoutAddress",
@@ -130,7 +130,7 @@
             "slot": "352",
             "type": "t_address",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:13"
+            "src": "contracts/PGFFactory.sol:48"
           },
           {
             "label": "s_fundingId",
@@ -138,7 +138,7 @@
             "slot": "353",
             "type": "t_uint256",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:14"
+            "src": "contracts/PGFFactory.sol:49"
           },
           {
             "label": "s_fundingIdToAddress",
@@ -146,7 +146,7 @@
             "slot": "354",
             "type": "t_mapping(t_uint256,t_address)",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:15"
+            "src": "contracts/PGFFactory.sol:50"
           },
           {
             "label": "s_contractBalance",
@@ -154,7 +154,7 @@
             "slot": "355",
             "type": "t_uint256",
             "contract": "PGFFactory",
-            "src": "contracts/PGFFactory.sol:16"
+            "src": "contracts/PGFFactory.sol:51"
           }
         ],
         "types": {
