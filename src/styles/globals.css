@@ -1,4 +1,7 @@
 :root {
+  --oxford-blue: hsl(217, 54%, 11%);
+  --light-oxford-blue: hsl(216, 50%, 16%);
+  --aqua: hsl(178, 100%, 60%);
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
@@ -83,6 +86,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: "Outfit", sans-serif;
 }
 
 body {
@@ -93,10 +97,13 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
-  color: inherit;
   text-decoration: none;
 }
 
@@ -104,4 +111,167 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.card {
+  background: var(--light-oxford-blue);
+  max-width: 350px;
+  margin: 10px;
+  padding: 24px;
+  border-radius: 15px;
+  box-shadow: 0px 20px 25 px 15px rgba(0,0,0,0.05),
+              0px 48px 30px 15px rgba(0,0,0,0.1);
+            
+}
+
+.card_product-img{
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card_product-img::after{
+  --aqua: hsla(178, 100%, 50%, 0.5);
+  content: url('https://htmlcolorcodes.com/assets/images/colors/baby-blue-color-solid-background-1920x1080.png');
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+
+.card_product-img:hover::after{
+  opacity: 0.7;
+}
+
+.card_product-img img{
+  width: 100%;
+  display: block;
+}
+
+.card_body{
+  padding: 23px 0px;
+  border-bottom: 1px solid var(--indigo-dye);
+  margin-bottom: 15px;
+
+}
+
+.card_title{
+  color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.card_title:hover{
+  color: var(--aqua);
+}
+
+.card_text{
+  color: var(--blue-yonder);
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 23px;
+}
+
+.card_body .wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card_price
+.card_countdown{
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.card_price {color: var(--aqua);}
+
+.card_icon{margin-right: 6px;}
+
+.card_countdown{color: var(--blue-yonder);}
+
+.card_footer{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.author-img{
+  width: 34px;
+  height: 34px;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  margin-right: 15px;
+}
+
+.author_name{
+  color: var(--blue-yonder);
+  font-weight: 500;
+}
+
+.author_name a{
+  color: #fff;
+  font-weight: 400;
+}
+
+
+.author_name a:hover{
+  color: var(--aqua);
+}
+
+.main{
+  display: flex;
+  padding: 0 30px 30px 30px;
+}
+
+@media (min-width: 992px) {
+  .main {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-auto-flow: column;
+  }
+}
+
+.banner{
+  max-height: 50vh;
+  width: 100%;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.banner img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+}
+
+.centered{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrap {
+  position:relative;
+}
+
+.wrap:before {
+  content:"";
+  position: absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background: rgba(0,0,0,0.5);
 }
