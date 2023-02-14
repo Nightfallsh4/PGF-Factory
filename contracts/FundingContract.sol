@@ -112,13 +112,6 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
 
         release();
 
-        uint256 amountReleased = released();
-
-        (bool success, ) = payable(msg.sender).call{value: amountReleased}("");
-
-        if (!success) {
-            revert FundingContract__TransferFailed();
-        }
         emit ContractorClaimedFunds(msg.sender, released());
     }
 
@@ -150,12 +143,16 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         }
         uint64 currentTimeStamp = uint64(block.timestamp - start());
         require(currentTimeStamp <= duration());
-        uint256 amount = vestedAmount(currentTimeStamp);
+        // uint256 amount = vestedAmount(currentTimeStamp);
+        // (bool success, ) = payable(msg.sender).call{value: amount}("");
+        // if (!success) {
+        //     revert FundingContract__TransferFailed();
+        // }
+        uint256 amount = address(this).balance - releasable();
         (bool success, ) = payable(msg.sender).call{value: amount}("");
         if (!success) {
             revert FundingContract__TransferFailed();
         }
-
         emit FundsWithdrawed(msg.sender, amount);
     }
 
@@ -222,5 +219,9 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
 
     function getWithdrawerCounter() public view returns (uint256) {
         return _withdrawers.current();
+    }
+
+    function getContractBalance() public view returns (uint256) {
+        return address(this).balance;
     }
 }

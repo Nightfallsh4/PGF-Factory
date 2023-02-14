@@ -1,6 +1,7 @@
 const { assert, expect } = require("chai")
 const { network, ethers, deployments } = require("hardhat")
 const { developmentChains } = require("../helper-hardhat-config")
+const { time } = require("@nomicfoundation/hardhat-network-helpers")
 
 const { MerkleTree } = require("merkletreejs")
 const keccak256 = require("keccak256")
@@ -94,9 +95,23 @@ const keccak256 = require("keccak256")
 
           describe("claim", () => {
               beforeEach(async () => {
+                  const initialContractBalance =
+                      await factoryContract.getContractBalance()
+                  console.log(
+                      "Initial Contract Balance: ",
+                      initialContractBalance.toString()
+                  )
+
                   const tx = await factoryContract.depositFunds({
                       value: ethers.utils.parseEther("0.5"),
                   })
+                  const finalContractBalance =
+                      await factoryContract.getContractBalance()
+                  console.log(
+                      "Contract Balance After Depositing: ",
+                      finalContractBalance.toString()
+                  )
+
                   await tx.wait()
                   await factoryContract.grantRole(
                       ethers.utils.keccak256(
@@ -123,28 +138,37 @@ const keccak256 = require("keccak256")
               })
 
               it("updates the contractor's balance", async () => {
-                  /*To be implemented*/
                   const deployerInitialBalance = await deployer.getBalance()
+                  const newTimeStamp = 7890000
+                  await time.increase(newTimeStamp)
                   const claimTx = await factoryContract.claim()
                   const reciept = await claimTx.wait()
                   const { gasUsed, effectiveGasPrice } = reciept
                   const gasCost = gasUsed.mul(effectiveGasPrice)
 
                   const deployerEndingBalance = await deployer.getBalance()
-                  //   assert.equal(
-                  //       deployerEndingBalance - deployerInitialBalance - gasCost,
-                  //       ethers.utils.parseEther("0.5")
-                  //   )
 
-                  //   console.log(
-                  //       "Initial Balance: ",
-                  //       deployerInitialBalance.toString()
-                  //   )
-                  //   console.log("Gas Cost: ", gasCost.toString())
-                  //   console.log(
-                  //       "Ending Balance: ",
-                  //       deployerEndingBalance.toString()
-                  //   )
+                  console.log(
+                      "Initial Balance: ",
+                      deployerInitialBalance.toString()
+                  )
+                  console.log("Gas Cost: ", gasCost.toString())
+                  console.log(
+                      "Ending Balance: ",
+                      deployerEndingBalance.toString()
+                  )
+
+                  assert.equal(
+                      deployerInitialBalance
+                          .add(ethers.utils.parseEther("0.5"))
+                          .sub(gasCost)
+                          .toString(),
+
+                      deployerEndingBalance.toString()
+                  )
+                  const finalContractBalance =
+                      await factoryContract.getContractBalance()
+                  assert.equal(finalContractBalance.toString(), "0")
               })
           })
 
@@ -204,7 +228,7 @@ const keccak256 = require("keccak256")
           describe("withdrawFunds", () => {
               beforeEach(async () => {
                   tx = await factoryContract.depositFunds({
-                      value: ethers.utils.parseEther("0.5"),
+                      value: ethers.utils.parseEther("3"),
                   })
                   await tx.wait()
                   await factoryContract.grantRole(
@@ -226,7 +250,43 @@ const keccak256 = require("keccak256")
               })
 
               it("withdraws vested funds and transfers it to the funder", async () => {
-                  /*To be implemented*/
+                  const initialFunderBalance = await deployer.getBalance()
+                  const initialBalance =
+                      await factoryContract.getContractBalance()
+
+                  console.log(
+                      "Initial Deployer balance: ",
+                      initialFunderBalance.toString()
+                  )
+                  console.log(
+                      "Initial Contract balance: ",
+                      initialBalance.toString()
+                  )
+                  const newTimestamp = 5260000
+                  await time.increase(newTimestamp) //To 1 month
+                  const withDrawTx = await factoryContract.withdrawFunds()
+                  const reciept = await withDrawTx.wait()
+                  const { gasUsed, effectiveGasPrice } = reciept
+                  const gasCost = gasUsed.mul(effectiveGasPrice)
+                  const finalFunderBalance = await deployer.getBalance()
+                  console.log(
+                      "Final Deployer balance: ",
+                      finalFunderBalance.toString()
+                  )
+                  const finalBalance =
+                      await factoryContract.getContractBalance()
+                  console.log(
+                      "Final Contract balance: ",
+                      finalBalance.toString()
+                  )
+
+                  assert.equal(
+                      finalFunderBalance.add(gasCost).toString(),
+                      initialFunderBalance
+                          .add(initialBalance)
+                          .sub(finalBalance)
+                          .toString()
+                  )
               })
 
               it("emits withdrawal event", async () => {
@@ -234,6 +294,12 @@ const keccak256 = require("keccak256")
                       factoryContract,
                       "FundsWithdrawed"
                   )
+              })
+
+              it("makes sure that the withdrawal can be done before the duration of the contract", async () => {
+                  const newTimeStamp = 10520000 //4 months
+                  await time.increase(newTimeStamp)
+                  await expect(factoryContract.withdrawFunds()).to.be.reverted
               })
           })
 
