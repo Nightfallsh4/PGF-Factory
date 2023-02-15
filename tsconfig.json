@@ -24,7 +24,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "deploy/00-deploy-PGFFactory.js"
-, "tailwind.config.js"  ],
+    "deploy/00-deploy-PGFFactory.js",
+    "tailwind.config.js",
+    "src/pages/CreateCampaign.jsx",
+    "src/pages/createNft.tsx"
+  ],
   "exclude": ["node_modules"]
 }
