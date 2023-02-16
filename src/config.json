@@ -1,0 +1,12 @@
+{
+    "31337": {
+        "pgfFactory": {
+            "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+        }
+    },
+    "5001": {
+        "pgfFactory": {
+            "address": "0xF9Aed77786Aa41207D9eF8c0fcD4C4FB37Ce8782"
+        }
+    }
+}
