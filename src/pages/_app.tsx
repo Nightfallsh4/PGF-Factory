@@ -1,12 +1,13 @@
 import "@/styles/globals.css"
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 // import type { AppProps } from "next/app"
 import dynamic from "next/dynamic"
 import CreateNFT from "./createNft"
 // import CampaignDetails from "./CampaignDetails";
 import CreateCampaign from "./CreateCampaign";
-import Home from ".";
+import Homee from "./Home";
 import { FundCard } from "./components";
+import  DisplayCampaigns from "./DisplayCampaigns";
 const BiconomyContextProvider = dynamic(
 	() => import("../contexts/BiconomyContext"),
 	{
@@ -20,9 +21,12 @@ export default function App({ Component, pageProps }) {
 		<BiconomyContextProvider>
 			<CreateNFT/>
 			<div>
-      <BrowserRouter>
-					<FundCard  />
-    </BrowserRouter>
+     <Routes>
+          <Route path="/" element={<Homee/>} />
+          {/* <Route path="myNfts" element={<Profile />} /> */}
+          <Route path="/createContract" element={<CreateCampaign />} />
+          {/* <Route path="/contract-details/:id" element={<CampaignDetails/>} /> */}
+        </Routes>
     </div>
 		</BiconomyContextProvider>
    
