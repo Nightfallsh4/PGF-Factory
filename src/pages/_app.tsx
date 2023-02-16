@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom"
 // import type { AppProps } from "next/app"
 import dynamic from "next/dynamic"
 import CreateNFT from "./createNft"
-import CampaignDetails from "./CampaignDetails";
+// import CampaignDetails from "./CampaignDetails";
 import CreateCampaign from "./CreateCampaign";
 import Home from ".";
 import { FundCard } from "./components";
