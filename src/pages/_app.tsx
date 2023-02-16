@@ -3,8 +3,10 @@ import { BrowserRouter } from "react-router-dom"
 // import type { AppProps } from "next/app"
 import dynamic from "next/dynamic"
 import CreateNFT from "./createNft"
+import CampaignDetails from "./CampaignDetails";
+import CreateCampaign from "./CreateCampaign";
 const BiconomyContextProvider = dynamic(
-	() => import("../components/contexts/BiconomyContext"),
+	() => import("../contexts/BiconomyContext"),
 	{
 		ssr: false,
 	},
@@ -16,9 +18,10 @@ export default function App({ Component, pageProps }) {
 		<BiconomyContextProvider>
 			<div>
       <BrowserRouter>
-	  
-        <CreateNFT />
-        </BrowserRouter>
+					<CreateNFT />
+					<CreateCampaign/>
+        {/* <CampaignDetails/> */}
+    </BrowserRouter>
     </div>
 		</BiconomyContextProvider>
    
