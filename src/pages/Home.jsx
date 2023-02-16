@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { DisplayCampaigns } from './components';
-import { BiconomyContext } from '../contexts'
+// import { BiconomyContext } from '../contexts'
 
 const Homee = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +24,7 @@ const Homee = () => {
     <DisplayCampaigns 
       title="All Public Funding Contracts"
       isLoading={isLoading}
-      campaigns={campaigns}
+      // campaigns={campaigns}
     />
   )
 }

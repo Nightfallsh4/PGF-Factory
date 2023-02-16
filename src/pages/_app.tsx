@@ -19,15 +19,18 @@ export default function App({ Component, pageProps }) {
 	return (
     // useContext(BiconomyContext) to get the account, socialLoginSDK, provider, smart account, connectWeb3 and disconnectWeb3 inside any component
 		<BiconomyContextProvider>
+			<BrowserRouter>
 			<CreateNFT/>
 			<div>
-     <Routes>
-          <Route path="/" element={<Homee/>} />
+				<Routes>
+					{/* <CreateNFT/> */}
+          {/* <Route path="/" element={<Homee/>} /> */}
           {/* <Route path="myNfts" element={<Profile />} /> */}
-          <Route path="/createContract" element={<CreateCampaign />} />
+          <Route path="/" element={<CreateCampaign />} />
           {/* <Route path="/contract-details/:id" element={<CampaignDetails/>} /> */}
         </Routes>
-    </div>
+				</div>
+				</BrowserRouter>
 		</BiconomyContextProvider>
    
 	)
