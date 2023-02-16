@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --oxford-blue: hsl(217, 54%, 11%);
   --light-oxford-blue: hsl(216, 50%, 16%);
@@ -124,14 +128,14 @@ a {
             
 }
 
-.card_product-img{
+.card{
   position: relative;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
 }
 
-.card_product-img::after{
+/* .card::after{
   --aqua: hsla(178, 100%, 50%, 0.5);
   content: url('https://htmlcolorcodes.com/assets/images/colors/baby-blue-color-solid-background-1920x1080.png');
   position: absolute;
@@ -141,12 +145,12 @@ a {
   align-items: center;
   opacity: 0;
   transition: all 0.25s ease;
-}
+} */
 
-
-.card_product-img:hover::after{
+/* 
+.card:hover::after{
   opacity: 0.7;
-}
+} */
 
 .card_product-img img{
   width: 100%;

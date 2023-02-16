@@ -2,10 +2,19 @@ import Head from "next/head"
 import Image from "next/image"
 import { Inter } from "@next/font/google"
 import styles from "@/styles/Home.module.css"
+import { useState } from "react"
+import Modal from "./Modal/Modal"
+import { setOriginalNode } from "typescript"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export default function Home() {
+
+	const [isModal, setModal] = useState(false);
+	const toggleModal = () => {
+		setModal(isModal => !isModal);
+	}
+
 
 	return (
 		<div >
@@ -15,6 +24,28 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+
+			<nav className="bg-gray-200 shadow shadow-gray-300 w-100 px-8 md:px-auto">
+				<div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
+					<div className="text-indigo-500 md:order-1">
+						PGF Factory
+					</div>
+					<div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
+						<ul className="flex font-semibold justify-between">
+							<li className="md:px-4 md:py-2 hover:text-indigo-400"><a href="#">Home</a></li>
+							<li className="md:px-4 md:py-2 text-indigo-500"><a href="#">NFT Collection</a></li>
+						</ul>
+					</div>
+					<div className="order-2 md:order-3">
+						<button className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3" />
+							</svg>
+							<span>Connect to Wallet</span>
+						</button>
+					</div>
+				</div>
+			</nav>
 
 			<div className="banner">
 				<div className="wrap">
@@ -31,7 +62,132 @@ export default function Home() {
 			</div>
 
 			<div className="main">
-				<div className="card">
+				<div className="card" onClick={()=>{setModal(true)}}>
+					<div className="card_head">
+						<div className="card_product-img">
+							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
+						</div>
+					</div>
+
+					<div className="card_body">
+						<a className="card_title">
+							<h3>Number #3737</h3>
+						</a>
+
+						<p className="card_text">The description</p>
+
+						<div className="wrapper">
+							<div className="card_price">
+								<span>0.03 ETH</span>
+							</div>
+							<div className="card_countdown">
+								<span>3 Days Left</span> 
+							</div>
+						</div>
+
+					</div>
+
+					<div className="card_footer">
+						<img className="author-img" src="https://m.media-amazon.com/images/I/5118mkJR64L.jpg" alt="" />
+						<p className="author_name">Name</p>
+					</div>
+				</div>
+
+
+				<div className="card" onClick={()=>{setModal(true)}}>
+					<div className="card_head">
+						<div className="card_product-img">
+							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
+						</div>
+					</div>
+
+					<div className="card_body">
+						<a className="card_title" href="">
+							<h3>Number #3737</h3>
+						</a>
+
+						<p className="card_text">The description</p>
+
+						<div className="wrapper">
+							<div className="card_price">
+								<span>0.03 ETH</span>
+							</div>
+							<div className="card_countdown">
+								<span>3 Days Left</span> 
+							</div>
+						</div>
+
+					</div>
+
+					<div className="card_footer">
+						<img className="author-img" src="https://m.media-amazon.com/images/I/5118mkJR64L.jpg" alt="" />
+						<p className="author_name">Name</p>
+					</div>
+				</div>
+
+				<div className="card" onClick={()=>{setModal(true)}}>
+					<div className="card_head">
+						<div className="card_product-img">
+							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
+						</div>
+					</div>
+
+					<div className="card_body">
+						<a className="card_title" href="">
+							<h3>Number #3737</h3>
+						</a>
+
+						<p className="card_text">The description</p>
+
+						<div className="wrapper">
+							<div className="card_price">
+								<span>0.03 ETH</span>
+							</div>
+							<div className="card_countdown">
+								<span>3 Days Left</span> 
+							</div>
+						</div>
+
+					</div>
+
+					<div className="card_footer">
+						<img className="author-img" src="https://m.media-amazon.com/images/I/5118mkJR64L.jpg" alt="" />
+						<p className="author_name">Name</p>
+					</div>
+				</div>
+
+				<div className="card" onClick={()=>{setModal(true)}}>
+					<div className="card_head">
+						<div className="card_product-img">
+							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
+						</div>
+					</div>
+
+					<div className="card_body">
+						<a className="card_title" href="">
+							<h3>Number #3737</h3>
+						</a>
+
+						<p className="card_text">The description</p>
+
+						<div className="wrapper">
+							<div className="card_price">
+								<span>0.03 ETH</span>
+							</div>
+							<div className="card_countdown">
+								<span>3 Days Left</span> 
+							</div>
+						</div>
+
+					</div>
+
+					<div className="card_footer">
+						<img className="author-img" src="https://m.media-amazon.com/images/I/5118mkJR64L.jpg" alt="" />
+						<p className="author_name">Name</p>
+					</div>
+				</div>
+
+				<div className="card" onClick={()=>{setModal(true)}}>
 					<div className="card_head">
 						<div className="card_product-img">
 							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
@@ -63,7 +219,7 @@ export default function Home() {
 				</div>
 
 
-				<div className="card">
+				<div className="card" onClick={()=>{setModal(true)}}>
 					<div className="card_head">
 						<div className="card_product-img">
 							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
@@ -94,7 +250,7 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="card">
+				<div className="card" onClick={()=>{setModal(true)}}>
 					<div className="card_head">
 						<div className="card_product-img">
 							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
@@ -125,7 +281,7 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="card">
+				<div className="card" onClick={()=>{setModal(true)}}>
 					<div className="card_head">
 						<div className="card_product-img">
 							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
@@ -156,132 +312,7 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="card">
-					<div className="card_head">
-						<div className="card_product-img">
-							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
-						</div>
-					</div>
-
-					<div className="card_body">
-						<a className="card_title" href="">
-							<h3>Number #3737</h3>
-						</a>
-
-						<p className="card_text">The description</p>
-
-						<div className="wrapper">
-							<div className="card_price">
-								<span>0.03 ETH</span>
-							</div>
-							<div className="card_countdown">
-								<span>3 Days Left</span> 
-							</div>
-						</div>
-
-					</div>
-
-					<div className="card_footer">
-						<img className="author-img" src="https://m.media-amazon.com/images/I/5118mkJR64L.jpg" alt="" />
-						<p className="author_name">Name</p>
-					</div>
-				</div>
-
-
-				<div className="card">
-					<div className="card_head">
-						<div className="card_product-img">
-							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
-						</div>
-					</div>
-
-					<div className="card_body">
-						<a className="card_title" href="">
-							<h3>Number #3737</h3>
-						</a>
-
-						<p className="card_text">The description</p>
-
-						<div className="wrapper">
-							<div className="card_price">
-								<span>0.03 ETH</span>
-							</div>
-							<div className="card_countdown">
-								<span>3 Days Left</span> 
-							</div>
-						</div>
-
-					</div>
-
-					<div className="card_footer">
-						<img className="author-img" src="https://m.media-amazon.com/images/I/5118mkJR64L.jpg" alt="" />
-						<p className="author_name">Name</p>
-					</div>
-				</div>
-
-				<div className="card">
-					<div className="card_head">
-						<div className="card_product-img">
-							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
-						</div>
-					</div>
-
-					<div className="card_body">
-						<a className="card_title" href="">
-							<h3>Number #3737</h3>
-						</a>
-
-						<p className="card_text">The description</p>
-
-						<div className="wrapper">
-							<div className="card_price">
-								<span>0.03 ETH</span>
-							</div>
-							<div className="card_countdown">
-								<span>3 Days Left</span> 
-							</div>
-						</div>
-
-					</div>
-
-					<div className="card_footer">
-						<img className="author-img" src="https://m.media-amazon.com/images/I/5118mkJR64L.jpg" alt="" />
-						<p className="author_name">Name</p>
-					</div>
-				</div>
-
-				<div className="card">
-					<div className="card_head">
-						<div className="card_product-img">
-							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
-						</div>
-					</div>
-
-					<div className="card_body">
-						<a className="card_title" href="">
-							<h3>Number #3737</h3>
-						</a>
-
-						<p className="card_text">The description</p>
-
-						<div className="wrapper">
-							<div className="card_price">
-								<span>0.03 ETH</span>
-							</div>
-							<div className="card_countdown">
-								<span>3 Days Left</span> 
-							</div>
-						</div>
-
-					</div>
-
-					<div className="card_footer">
-						<img className="author-img" src="https://m.media-amazon.com/images/I/5118mkJR64L.jpg" alt="" />
-						<p className="author_name">Name</p>
-					</div>
-				</div>
-
-				<div className="card">
+				<div className="card" onClick={()=>{setModal(true)}}>
 					<div className="card_head">
 						<div className="card_product-img">
 							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
@@ -313,7 +344,7 @@ export default function Home() {
 				</div>
 
 
-				<div className="card">
+				<div className="card" onClick={()=>{setModal(true)}}>
 					<div className="card_head">
 						<div className="card_product-img">
 							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
@@ -344,7 +375,7 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="card">
+				<div className="card" onClick={()=>{setModal(true)}}>
 					<div className="card_head">
 						<div className="card_product-img">
 							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
@@ -375,7 +406,7 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="card">
+				<div className="card" onClick={()=>{setModal(true)}}>
 					<div className="card_head">
 						<div className="card_product-img">
 							<img src="https://www.cnet.com/a/img/resize/f6c7acae69061033904163bfd7e3bd0a28158be5/hub/2022/06/06/1e434c1e-e76f-47d3-9365-444ae1e4bddf/screen-shot-2022-06-06-at-11-32-02-am.jpg?auto=webp" alt="" />
@@ -407,7 +438,7 @@ export default function Home() {
 				</div>
 			</div>
 
-			
+			<Modal isVisible={isModal} onClose={() => {setModal(false)}}/>
 		</div>
 	)
 }
