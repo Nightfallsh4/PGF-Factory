@@ -28,6 +28,6 @@
     "tailwind.config.js",
     "src/pages/CreateCampaign.jsx",
     "src/pages/createNft.tsx"
-  ],
+, "test/pgfFactoryContract.test.js"  ],
   "exclude": ["node_modules"]
 }

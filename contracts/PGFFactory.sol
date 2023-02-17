@@ -67,7 +67,8 @@ contract PGFFactory is
         bool _isGroupWithdrawal,
         string memory _tokenUri,
         uint64 _startTimestamp,
-        uint64 _vestingPeriodInSeconds
+        uint64 _vestingPeriodInSeconds,
+        bytes32 _merkleRoot
     ) external payable isEnoughEther {
         FundingContract fundingContract = new FundingContract(
             _totalFunding,
@@ -75,7 +76,8 @@ contract PGFFactory is
             _isGroupWithdrawal,
             _tokenUri,
             _startTimestamp,
-            _vestingPeriodInSeconds
+            _vestingPeriodInSeconds,
+            _merkleRoot
         );
         s_fundingIdToAddress[s_fundingId] = address(fundingContract);
         s_fundingId++;

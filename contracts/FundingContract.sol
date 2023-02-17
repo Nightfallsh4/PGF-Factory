@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/finance/VestingWallet.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
+import "hardhat/console.sol";
 
 error FundingContract__TransferFailed();
 error FundingContract__NotEnoughETH();
@@ -45,10 +46,13 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
     );
 
     uint256 private immutable s_totalAmount;
-    uint256 private immutable s_withdrawalFee;
+    uint256 private immutable s_withdrawalFee; // In BPS
     bool private immutable _isGroupWithdrawal;
     uint256 private s_startTimestamp;
+    uint256 public s_totalFundedAmount;
+    uint256 public s_feeFromWithdrawal;
     string private _tokenURI;
+    bytes32 private _merkleRoot;
 
     mapping(address => uint256) private s_addressToAmountFunded;
     address[] s_funders;
@@ -68,7 +72,8 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         bool isGroupWithdrawal,
         string memory tokenUri,
         uint64 startTimestamp,
-        uint64 vestingPeriodInSeconds
+        uint64 vestingPeriodInSeconds,
+        bytes32 merkleRoot
     )
         ERC721("FundingContractToken", "FCT")
         VestingWallet(msg.sender, startTimestamp, vestingPeriodInSeconds)
@@ -78,10 +83,12 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         _isGroupWithdrawal = isGroupWithdrawal;
         s_startTimestamp = startTimestamp;
         _tokenURI = tokenUri;
+        _merkleRoot = merkleRoot;
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
 
-    function depositFunds() public payable {
+    function depositFunds(bytes32[] calldata merkleProof) public payable {
+        //check if the funding is greater than totalAmount
         uint256 minFundingAmount = getMinimumFundingAmount();
         uint256 currentTokenId = _tokenIds.current();
 
@@ -89,8 +96,9 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
             revert FundingContract__NotEnoughETH();
         }
         s_addressToAmountFunded[msg.sender] = msg.value;
+        s_totalFundedAmount += msg.value;
         s_funders.push(msg.sender);
-        //Is a valid Merkle Proof needed before this?
+        verifyMerkleTree(merkleProof, _merkleRoot);
         _safeMint(msg.sender, currentTokenId);
         _tokenIds.increment();
 
@@ -143,12 +151,33 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         }
         uint64 currentTimeStamp = uint64(block.timestamp - start());
         require(currentTimeStamp <= duration());
-        // uint256 amount = vestedAmount(currentTimeStamp);
+        uint256 vestedAmount = vestedAmount(uint64(block.timestamp));
+        // console.log("Vested Amount ", vestedAmount);
+
+        uint256 totalFundedAmount = s_totalFundedAmount;
+        // console.log("Total funded Amount ", totalFundedAmount);
+
+        uint256 senderAmount = s_addressToAmountFunded[msg.sender];
+        // console.log("Sender Amount ", senderAmount);
+
+        uint256 netAmount = totalFundedAmount - vestedAmount;
+        // console.log("Net Amount ", netAmount);
+
+        uint256 amountBeforeFee = (netAmount * senderAmount) /
+            totalFundedAmount;
+
+        // console.log("Amount Before Fee ", amountBeforeFee);
+
+        uint256 withdrawFee = (amountBeforeFee * s_withdrawalFee) / 10000;
+        // console.log("Withdrawal Fee ", s_withdrawalFee);
+        // console.log("Withdraw Fee ", withdrawFee);
+        uint256 amount = amountBeforeFee - withdrawFee;
+        // console.log("Amount ", amount);
         // (bool success, ) = payable(msg.sender).call{value: amount}("");
         // if (!success) {
         //     revert FundingContract__TransferFailed();
         // }
-        uint256 amount = address(this).balance - releasable();
+        // uint256 amount = address(this).balance - releasable();
         (bool success, ) = payable(msg.sender).call{value: amount}("");
         if (!success) {
             revert FundingContract__TransferFailed();
