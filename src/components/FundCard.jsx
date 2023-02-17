@@ -1,10 +1,10 @@
 // import React from 'react';
 
 // import { tagType, thirdweb } from '../assets';
-// import { daysLeft } from '../utils';
+// // import { daysLeft } from '../utils/util';
 
 // const FundCard = ({ owner, title, description, target, deadline, amountCollected, image, handleClick }) => {
-//   const remainingDays = daysLeft(deadline);
+//   const remainingDays = 50;
   
 //   return (
 //     <div className="sm:w-[288px] w-full rounded-[15px] bg-[#1c1c24] cursor-pointer" onClick={handleClick}>
