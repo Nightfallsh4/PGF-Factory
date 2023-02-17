@@ -58,9 +58,16 @@ const { developmentChains } = require("../helper-hardhat-config")
           })
 
           describe("createFunding tests", () => {
-            it("reverts if ether sent less than creationFee",  async () => {
+            beforeEach(async () => {
                 const totalFunding = ethers.utils.parseEther("1")
                 const withdrawalFee = 10
+                const isGroupWithdrawal = false
+                const tokenUri = "https://github.com/nightfallsh4"
+                const startTimestamp = Date.now() + 10000
+                const vestingPeriodInSeconds = 60 * 60 * 2
+            })
+            it("reverts if ether sent less than creationFee",  async () => {
+                
                 await expect(pgfFactory.createFunding())
             })
           })
