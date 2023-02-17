@@ -45,9 +45,11 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
     );
 
     uint256 private immutable s_totalAmount;
-    uint256 private immutable s_withdrawalFee;
+    uint256 private immutable s_withdrawalFee; // In BPS
     bool private immutable _isGroupWithdrawal;
     uint256 private s_startTimestamp;
+    uint256 public s_totalFundedAmount;
+    uint256 public s_feeFromWithdrawal;
     string private _tokenURI;
 
     mapping(address => uint256) private s_addressToAmountFunded;
@@ -89,6 +91,7 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
             revert FundingContract__NotEnoughETH();
         }
         s_addressToAmountFunded[msg.sender] = msg.value;
+        s_totalFundedAmount += msg.value;
         s_funders.push(msg.sender);
         //Is a valid Merkle Proof needed before this?
         _safeMint(msg.sender, currentTokenId);
@@ -143,12 +146,17 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         }
         uint64 currentTimeStamp = uint64(block.timestamp - start());
         require(currentTimeStamp <= duration());
-        // uint256 amount = vestedAmount(currentTimeStamp);
+        uint256 vestedAmount = vestedAmount(currentTimeStamp);
+        uint256 totalFundedAmount = s_totalFundedAmount;
+        uint256 senderAmount = s_addressToAmountFunded[msg.sender];
+        uint256 amountBeforeFee = (totalFundedAmount - vestedAmount) * senderAmount / totalFundedAmount; 
+        uint256 withdrawFee = amountBeforeFee * (s_withdrawalFee / 10000);
+        uint256 amount = amountBeforeFee - withdrawFee;
         // (bool success, ) = payable(msg.sender).call{value: amount}("");
         // if (!success) {
         //     revert FundingContract__TransferFailed();
         // }
-        uint256 amount = address(this).balance - releasable();
+        // uint256 amount = address(this).balance - releasable();
         (bool success, ) = payable(msg.sender).call{value: amount}("");
         if (!success) {
             revert FundingContract__TransferFailed();
