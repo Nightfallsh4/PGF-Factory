@@ -48,6 +48,7 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
     uint256 private immutable s_totalAmount;
     uint256 private immutable s_withdrawalFee; // In BPS
     bool private immutable _isGroupWithdrawal;
+    address private immutable payoutAddress;
     uint256 private s_startTimestamp;
     uint256 public s_totalFundedAmount;
     uint256 public s_feeFromWithdrawal;
@@ -85,6 +86,8 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         _tokenURI = tokenUri;
         _merkleRoot = merkleRoot;
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(CONTRACTOR_ROLE, msg.sender);
+        payoutAddress = msg.sender;
     }
 
     function depositFunds(bytes32[] calldata merkleProof) public payable {
@@ -101,6 +104,7 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
         verifyMerkleTree(merkleProof, _merkleRoot);
         _safeMint(msg.sender, currentTokenId);
         _tokenIds.increment();
+        _grantRole(FUNDER_ROLE, msg.sender);
 
         emit FundsDeposited(currentTokenId, msg.sender, msg.value);
     }
@@ -252,5 +256,13 @@ contract FundingContract is ERC721, AccessControl, VestingWallet {
 
     function getContractBalance() public view returns (uint256) {
         return address(this).balance;
+    }
+
+    function getMerkleRoot() public view returns (bytes32) {
+        return _merkleRoot;
+    }
+
+    function getPayoutAddress() public view returns (address) {
+        return payoutAddress;
     }
 }
