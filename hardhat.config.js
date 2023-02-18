@@ -35,6 +35,10 @@ module.exports = {
         localhost: {
             chainId: 31337,
         },
+        polygon_mumbai: {
+            url: "https://rpc-mumbai.maticvigil.com",
+            accounts: [process.env.ACCOUNT_PRIVATE_KEY]
+          }
         // mantle-testnet: {
         //     url: "https://rpc.testnet.mantle.xyz/",
         //     accounts: [process.env.PRIVATE_KEY], // Uses the private key from the .env file
