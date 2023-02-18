@@ -1,6 +1,6 @@
 import { Chat } from "@pushprotocol/uiweb"
 
-export default function pushSupportChat({ userAddress }) {
+export default function PushSupportChat({ userAddress }) {
     return (
         <Chat
             account={userAddress} //user address
