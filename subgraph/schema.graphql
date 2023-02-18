@@ -1,0 +1,30 @@
+type Funding @entity {
+	id: ID!
+	address: Bytes!
+	creator: Bytes!
+	admin: Bytes!
+	contractorAddress: Bytes!
+	uri: String!
+	root: String!
+	createdAt: BigInt!
+  totalAmountRequested: BigInt!
+  totalAmountFunded: BigInt
+	isGroupWihtdrawal: Boolean!
+  withdrawalFee: BigInt!
+  vestingPeriod: BigInt!
+	tokens: [Token!]! @derivedFrom(field: "collection")
+}
+
+type Token @entity {
+	id: ID!
+	address: Bytes!
+	tokenId: BigInt!
+	owner: User!
+	collection: Funding!
+  amount: BigInt!
+}
+
+type User @entity {
+	id: ID!
+	tokens: [Token!]! @derivedFrom(field: "owner")
+}
