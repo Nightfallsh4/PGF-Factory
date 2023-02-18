@@ -38,3 +38,8 @@ next-env.d.ts
 artifacts/
 bin/
 cache/
+
+.openzeppelin
+artifacts
+cache
+bin
