@@ -35,10 +35,10 @@ module.exports = {
         localhost: {
             chainId: 31337,
         },
-        "mantle-testnet": {
-            url: "https://rpc.testnet.mantle.xyz/",
-            accounts: [process.env.PRIVATE_KEY], // Uses the private key from the .env file
-        },
+        // mantle-testnet: {
+        //     url: "https://rpc.testnet.mantle.xyz/",
+        //     accounts: [process.env.PRIVATE_KEY], // Uses the private key from the .env file
+        // },
     },
     gasReporter: {
         enabled: false,

@@ -90,7 +90,7 @@ contract PGFFactory is
         );
     }
 
-    function withdraw() external nonReentrant {
+    function withdraw() external nonReentrant onlyRole(DEFAULT_ADMIN_ROLE) {
         address payoutAddress = s_payoutAddress;
         uint256 contractBalance = s_contractBalance;
         (bool success, ) = payable(payoutAddress).call{value: contractBalance}(

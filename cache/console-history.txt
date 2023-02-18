@@ -1,1 +1,0 @@
-const pushNFT = await ethers.getContractFactory("PushNFT");
