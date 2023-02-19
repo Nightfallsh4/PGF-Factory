@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ethers } from "ethers"
-
+import {ToggleSwitch} from './components'
 // import { useStateContext } from '../context';
 // import { money } from '../assets';
 import { CustomButton, FormField, Loader } from "../components"
@@ -187,19 +187,31 @@ function CreateCampaign() {
                         </p>
                     </div>
                 </div>
+                 <div>
+                        <ToggleSwitch label="Group Withdrwal"/>
+                    </div>
                 <div>
-                    <button onClick={addInput}>Add WhiteListed Addressess?</button>
+                   
+                    <button class="btn btn-blue"
+                     
+                        onClick={addInput}>Add WhiteListed Addressess?
+                    </button>
                     {arr.map((item, i) => {
                         return (
-                            <div style={{margin:"20px", borderRadius:"200px"}}>
-                            <input
-                                onChange={handleChange}
-                                value={item.value}
-                                id={i}
-                                type={item.type}
-                                size="40"
-                            />
-                                </div>
+                            <div
+                                style={{
+                                    margin: "20px",
+                                    borderRadius: "200px",
+                                }}
+                            >
+                                <input
+                                    onChange={handleChange}
+                                    value={item.value}
+                                    id={i}
+                                    type={item.type}
+                                    size="40"
+                                />
+                            </div>
                         )
                     })}
                 </div>
