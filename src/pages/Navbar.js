@@ -34,29 +34,29 @@ function Navbar() {
                 <div className="hidden lg:flex lg:gap-x-12">
                     <Link
                         href="/"
-                        className="text-sm font-semibold leading-6 text-gray-900"
+                        className="text-xl font-semibold leading-6 text-gray-900"
                     >
                         Home
                     </Link>
                     <Link
                         href="/listed-contracts"
-                        className="text-sm font-semibold leading-6 text-gray-900"
+                        className="text-xl font-semibold leading-6 text-gray-900"
                     >
                         Listed Contracts
                     </Link>
 
                     <Link
                         href="/create"
-                        className="text-sm font-semibold leading-6 text-gray-900"
+                        className="text-xl font-semibold leading-6 text-gray-900"
                     >
-                        Create Contract
+                        <button type="button">Create Contract</button>
                     </Link>
 
                     <Link
                         href="/myFundingContract"
-                        className="text-sm font-semibold leading-6 text-gray-900"
+                        className="text-xl font-semibold leading-6 text-gray-900"
                     >
-                        My Funded Contracts
+                        My Contracts
                     </Link>
                 </div>
 
