@@ -1,17 +1,18 @@
 "use client"
 import React, { useContext, useState } from "react"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
-import { BiconomyContext } from "@/contexts/BiconomyContext"
+// import { BiconomyContext } from "@/contexts/BiconomyContext"
 import { CircularProgress } from "@mui/material"
 function Land() {
-    const { connectWeb3, disconnectWeb3, account, smartAccount } =
-        useContext(BiconomyContext)
+    // const { connectWeb3, disconnectWeb3, account, smartAccount } =
+    //     useContext(BiconomyContext)
     const [isClicked, setIsClicked] = useState(false)
-    async function connect() {
-        setIsClicked(true)
-        await connectWeb3()
-        setIsClicked(false)
-    }
+    // async function connect() {
+    //     setIsClicked(true)
+    //     // await connectWeb3()
+    //     setIsClicked(false)
+    // }
     return (
         <div className=" bg-red">
             <div className="absolute  top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
@@ -89,37 +90,10 @@ function Land() {
                             My Funded Contracts
                         </a>
                     </div>
-                    {!smartAccount ? (
-                        <div
-                            className="hidden lg:flex lg:flex-1 lg:justify-end"
-                            onClick={connect}
-                        >
-                            <a
-                                //   href="#"
-                                className="text-sm font-semibold leading-6 text-gray-900"
-                            >
-                                {isClicked ? (
-                                    <CircularProgress />
-                                ) : (
-                                    "Connect Web 3 Wallets "
-                                )}
-                                <span aria-hidden="true">&rarr;</span>
-                            </a>
-                        </div>
-                    ) : (
-                        <div
-                            className="hidden lg:flex lg:flex-1 lg:justify-end"
-                            onClick={disconnectWeb3}
-                        >
-                            <a
-                                //   href="#"
-                                className="text-sm font-semibold leading-6 text-gray-900"
-                            >
-                                Disconnect Wallet{" "}
-                                <span aria-hidden="true">&rarr;</span>
-                            </a>
-                        </div>
-                    )}
+
+                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                        <ConnectButton />
+                    </div>
                 </nav>
 
                 <div role="dialog" aria-modal="true">
