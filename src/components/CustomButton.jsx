@@ -6,12 +6,33 @@ import { makeRoot } from "@/pages/utils/merkleTree"
 // import { CustomFundingButtonInterface } from "../pages/utils/interfaces";
 import Modal from "@mui/material/Modal"
 import { Box, Typography } from "@mui/material"
+import { useNotification } from "@web3uikit/core"
 
 const CustomButton = (params) => {
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
     const [hash, setHash] = React.useState("")
+
+    const dispatch = useNotification()
+
+    const handleSuccessNotification = (hash) => {
+        dispatch({
+            type: "success",
+            message: { hash },
+            title: "NFT Minted",
+            position: "topR",
+        })
+    }
+
+    const handleFailNotification = () => {
+        dispatch({
+            type: "error",
+            message: "Contract creation Failed",
+            title: "Minting Failed",
+            position: "topR",
+        })
+    }
 
     const style = {
         position: "absolute",
@@ -77,6 +98,12 @@ const CustomButton = (params) => {
             onSuccess(data) {
                 console.log(data.hash)
                 setHash(data.hash)
+                if (isSuccess) {
+                    handleSuccessNotification(hash)
+                }
+            },
+            onError() {
+                handleFailNotification()
             },
         })
     async function deploy() {
@@ -100,7 +127,6 @@ const CustomButton = (params) => {
             >
                 {params.title}
             </button>
-            
         </div>
     )
 }

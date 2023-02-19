@@ -75,7 +75,6 @@ function CreateCampaign() {
         setForm({ ...form, [fieldName]: e.target.value })
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -95,7 +94,6 @@ function CreateCampaign() {
 
     const [arr, setArr] = useState(inputArr)
     const [clicked, setClicked] = useState(false)
-
 
     const addInput = () => {
         setArr((s) => {
@@ -121,20 +119,20 @@ function CreateCampaign() {
         })
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        // checkIfImage(form.image, async (exists) => {
-        //     if (exists) {
-        //         setIsLoading(true)
-        //         // await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
-        //         setIsLoading(false)
-        //         navigate("/")
-        //     } else {
-        //         alert("Provide valid image URL")
-        //         setForm({ ...form, image: "" })
-        //     }
-        // })
-    }
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault()
+    //     // checkIfImage(form.image, async (exists) => {
+    //     //     if (exists) {
+    //     //         setIsLoading(true)
+    //     //         // await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+    //     //         setIsLoading(false)
+    //     //         navigate("/")
+    //     //     } else {
+    //     //         alert("Provide valid image URL")
+    //     //         setForm({ ...form, image: "" })
+    //     //     }
+    //     // })
+    // }
 
     return (
         <div
