@@ -7,9 +7,54 @@ import { ethers } from "ethers"
 import { CustomButton, FormField, Loader } from "../components"
 import { checkIfImage } from "./utils/util"
 
-function CreateCampaign () {
-    
+function CreateCampaign() {
     const [isLoading, setIsLoading] = useState(false)
+      const [isOn, setIsOn] = useState(false)
+
+      const handleCchange = () => {
+          setIsOn(!isOn)
+      }
+    const switchStyles = {
+     float:"right",
+      position: "relative",
+      display: "inline-block",
+      width: "60px",
+      height: "34px",
+  }
+
+  const inputStyles = {
+      opacity: 0,
+      width: 0,
+      height: 0,
+  }
+
+  const sliderStyles = {
+      position: "absolute",
+      cursor: "pointer",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "#ccc",
+      transition: "0.4s",
+  }
+
+  const roundStyles = {
+      position: "absolute",
+      content: '""',
+      height: "26px",
+      width: "26px",
+      left: "4px",
+      bottom: "4px",
+      backgroundColor: "white",
+      transition: "0.4s",
+  }
+
+  if (isOn) {
+      sliderStyles.backgroundColor = "#2196F3"
+      roundStyles.transform = "translateX(26px)"
+  }
+
 
     const [form, setForm] = useState({
         name: "",
@@ -26,7 +71,7 @@ function CreateCampaign () {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-z
+        
         checkIfImage(form.image, async (exists) => {
             if (exists) {
                 setIsLoading(true)
@@ -39,10 +84,50 @@ z
             }
         })
     }
+    const inputArr = [
+       
+    ]
+
+    const [arr, setArr] = useState(inputArr)
+    const [clicked, setClicked] = useState(false);
+
+    const addInput = () => {
+        setClicked(true)
+        setArr((s) => {
+            return [
+                ...s,
+                {
+                    type: "text",
+                    value: "",
+                },
+            ]
+        })
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault()
+
+        const index = e.target.id
+        setArr((s) => {
+            const newArr = s.slice()
+            newArr[index].value = e.target.value
+
+            return newArr
+        })
+    }
 
     return (
-        <div className="bg-gradient-to-r from-blue-400 to-emerald-400 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4 " style={{marginBottom:"150px",marginRight:"150px", marginLeft:"150px",marginTop:"50px",  borderColor: "#9ecaed" ,
-    boxShadow: "0 0 100px black"}}>
+        <div
+            className="bg-gradient-to-r from-blue-400 to-gray-400 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4 "
+            style={{
+                marginBottom: "150px",
+                marginRight: "150px",
+                marginLeft: "150px",
+                marginTop: "50px",
+                borderColor: "#9ecaed",
+                boxShadow: " 100px black",
+            }}
+        >
             {isLoading && <Loader />}
             <h1
                 style={{
@@ -147,6 +232,44 @@ z
                         </p>
                     </div>
                 </div>
+                <div>
+                    <button
+                        type="button"
+                        class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                    onClick={addInput}>
+                        Add Whitelisted addressess here
+                    </button>
+                    {clicked && arr.map((item, i) => {
+                        return (
+                            <div
+                                style={{
+                                    margin: "20px",
+                                    borderRadius: "200px",
+                                }}
+                            >
+                                <input
+                                    onChange={handleChange}
+                                    value={item.value}
+                                    id={i}
+                                    type={item.type}
+                                    size="40"
+                                />
+                            </div>
+                        )
+                    })}
+                </div>
+                <div>Enable Group Withdrawal?</div>
+                <label style={switchStyles}>
+                    <input
+                        type="checkbox"
+                        checked={isOn}
+                        onChange={handleCchange}
+                        style={inputStyles}
+                    />
+                    <span style={sliderStyles}>
+                        <span style={roundStyles}> </span>
+                    </span>
+                </label>
 
                 <div className="flex justify-center items-center mt-[40px]">
                     <CustomButton
