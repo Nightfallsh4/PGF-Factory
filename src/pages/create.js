@@ -7,8 +7,7 @@ import { ethers } from "ethers"
 import { CustomButton, FormField, Loader } from "../components"
 import { checkIfImage } from "./utils/util"
 
-function CreateCampaign () {
-    
+function CreateCampaign() {
     const [isLoading, setIsLoading] = useState(false)
 
     const [form, setForm] = useState({
@@ -23,10 +22,42 @@ function CreateCampaign () {
     const handleFormFieldChange = (fieldName, e) => {
         setForm({ ...form, [fieldName]: e.target.value })
     }
+    const inputArr = [
+        {
+            type: "text",
+            id: 1,
+            value: "",
+        },
+    ]
+
+    const [arr, setArr] = useState(inputArr)
+
+    const addInput = () => {
+        setArr((s) => {
+            return [
+                ...s,
+                {
+                    type: "text",
+                    value: "",
+                },
+            ]
+        })
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault()
+
+        const index = e.target.id
+        setArr((s) => {
+            const newArr = s.slice()
+            newArr[index].value = e.target.value
+
+            return newArr
+        })
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-z
         checkIfImage(form.image, async (exists) => {
             if (exists) {
                 setIsLoading(true)
@@ -41,8 +72,17 @@ z
     }
 
     return (
-        <div className="bg-gradient-to-r from-blue-400 to-emerald-400 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4 " style={{marginBottom:"150px",marginRight:"150px", marginLeft:"150px",marginTop:"50px",  borderColor: "#9ecaed" ,
-    boxShadow: "0 0 100px black"}}>
+        <div
+            className="bg-gradient-to-r from-blue-400 to-emerald-400 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4 "
+            style={{
+                marginBottom: "150px",
+                marginRight: "150px",
+                marginLeft: "150px",
+                marginTop: "50px",
+                borderColor: "#9ecaed",
+                boxShadow: "0 0 100px black",
+            }}
+        >
             {isLoading && <Loader />}
             <h1
                 style={{
@@ -120,12 +160,12 @@ z
                             viewBox="0 0 48 48"
                             aria-hidden="true"
                         >
-                            <path
+                            {/* <path
                                 d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                                 stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                            />
+                            /> */}
                         </svg>
                         <div class="flex text-sm text-white-600">
                             <label
@@ -146,6 +186,22 @@ z
                             PNG, JPG, GIF up to 10MB
                         </p>
                     </div>
+                </div>
+                <div>
+                    <button onClick={addInput}>Add WhiteListed Addressess?</button>
+                    {arr.map((item, i) => {
+                        return (
+                            <div style={{margin:"20px", borderRadius:"200px"}}>
+                            <input
+                                onChange={handleChange}
+                                value={item.value}
+                                id={i}
+                                type={item.type}
+                                size="40"
+                            />
+                                </div>
+                        )
+                    })}
                 </div>
 
                 <div className="flex justify-center items-center mt-[40px]">
