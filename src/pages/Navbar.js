@@ -1,5 +1,5 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react"
+import Link from "next/link"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
     function Navbar() {
   return (
@@ -54,12 +54,12 @@ import { ConnectButton } from "@rainbow-me/rainbowkit"
                   </a>
               </div>
 
-              <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                  <ConnectButton />
-              </div>
-          </nav>
-      </div>
-  )
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                    <ConnectButton />
+                </div>
+            </nav>
+        </div>
+    )
 }
 
 export default Navbar

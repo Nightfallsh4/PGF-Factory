@@ -3,7 +3,8 @@ import React, { useContext, useState } from "react"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
 // import { BiconomyContext } from "@/contexts/BiconomyContext"
-import { CircularProgress } from "@mui/material"
+import PushSupportChat from "../../notifications/supportChat"
+import { useAccount } from "wagmi"
 function Land() {
     // const { connectWeb3, disconnectWeb3, account, smartAccount } =
     //     useContext(BiconomyContext)
@@ -13,6 +14,7 @@ function Land() {
     //     // await connectWeb3()
     //     setIsClicked(false)
     // }
+    const { address } = useAccount()
     return (
         <div className=" bg-red">
             <div className="absolute  top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
@@ -41,8 +43,6 @@ function Land() {
                 </svg>
             </div>
             <div className="px-6 pt-6 lg:px-8">
-                
-
                 <div role="dialog" aria-modal="true">
                     <div
                         focus="true"
@@ -123,6 +123,9 @@ function Land() {
                             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                                 Build Trust With Us
                             </h1>
+                            <div>
+                                <PushSupportChat userAddress={address} />
+                            </div>
                             <p className="mt-6 text-lg leading-8 text-gray-600">
                                 A Public Goods Funding Product to help build
                                 trust among entities
