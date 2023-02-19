@@ -100,6 +100,7 @@ const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
         const selectedImage = event.target.files[0]
         setImage(URL.createObjectURL(selectedImage))
+        setForm({ ...form, image: event.target.value })
     }
 }
 
@@ -247,6 +248,7 @@ const handleImageChange = (event) => {
                                     marginTop: "10px",
                                 }}
                             >
+                                
                                 <img
                                     src={image}
                                     alt="uploaded image"
@@ -257,7 +259,7 @@ const handleImageChange = (event) => {
                                 />
                             </div>
                         )}
-                    </div>
+                    </div> 
                 </div>
                 <div>
                     <button onClick={addInput}>
