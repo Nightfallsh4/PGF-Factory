@@ -119,14 +119,14 @@ function CreateCampaign() {
 
     return (
         <div
-            className="bg-gradient-to-r from-blue-400 to-gray-400 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4 "
+            className="bg-gradient-to-r from-red-400 to-blue-500 flex justify-center items-center flex-col rounded-[25px] sm:p-10 p-4 "
             style={{
                 marginBottom: "150px",
                 marginRight: "150px",
                 marginLeft: "150px",
                 marginTop: "50px",
                 borderColor: "#9ecaed",
-                boxShadow: " 100px black",
+                boxShadow: "0 0 100px black",
             }}
         >
             {isLoading && <Loader />}
@@ -135,16 +135,16 @@ function CreateCampaign() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "70px",
+                    fontSize: "50px",
                 }}
-                className="text-slate-100 font-semibold"
+                className="text-bold-100 font-semibold"
             >
                 Create A Funding Contract
             </h1>
 
             <form
                 onSubmit={handleSubmit}
-                className="w-full mt-[65px] flex flex-col gap-[30px]"
+                className=" mt-[15px] flex flex-col gap-[10px]"
             >
                 <div className="flex flex-wrap gap-[40px]">
                     <FormField
@@ -172,13 +172,6 @@ function CreateCampaign() {
                         handleFormFieldChange("description", e)
                     }
                 />
-
-                <div className="w-full flex justify-start items-center p-4 bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800 h-[120px] rounded-[10px]">
-                    {/* <img src={money} alt="money" className="w-[40px] h-[40px] object-contain"/> */}
-                    <h4 className="font-epilogue text-2xl text-white ml-[20px]">
-                        Each Contract Funder can fund 10% of the Contract Amount
-                    </h4>
-                </div>
 
                 <div className="flex flex-wrap gap-[40px]">
                     <FormField
@@ -213,10 +206,13 @@ function CreateCampaign() {
                                 stroke-linejoin="round"
                             /> */}
                         </svg>
-                        <div class="flex text-sm text-white-600">
+                        <div
+                            class="flex text-sm text-white-600"
+                            style={{ borderColor: "black" }}
+                        >
                             <label
                                 for="file-upload"
-                                class="relative cursor-pointer rounded-md py-1 px-2 bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                                class="relative cursor-pointer rounded-md py-1 px-2 bg-black font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                             >
                                 <span>Upload a file</span>
                                 <input
@@ -228,36 +224,46 @@ function CreateCampaign() {
                             </label>
                             <p class="pl-1">or drag and drop</p>
                         </div>
+
                         <p class="text-xs text-white-500">
                             PNG, JPG, GIF up to 10MB
                         </p>
                     </div>
                 </div>
+                <div className="w-full flex justify-start items-center p-4 bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800 h-[120px] rounded-[10px]">
+                    {/* <img src={money} alt="money" className="w-[40px] h-[40px] object-contain"/> */}
+                    <h4 className="font-epilogue text-2xl text-white ml-[20px]">
+                        Each Contract Funder can fund 10% of the Contract Amount
+                    </h4>
+                </div>
+
                 <div>
                     <button
                         type="button"
                         class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={addInput}>
+                        onClick={addInput}
+                    >
                         Add Whitelisted addressess here
                     </button>
-                    {clicked && arr.map((item, i) => {
-                        return (
-                            <div
-                                style={{
-                                    margin: "20px",
-                                    borderRadius: "200px",
-                                }}
-                            >
-                                <input
-                                    onChange={handleChange}
-                                    value={item.value}
-                                    id={i}
-                                    type={item.type}
-                                    size="40"
-                                />
-                            </div>
-                        )
-                    })}
+                    {clicked &&
+                        arr.map((item, i) => {
+                            return (
+                                <div
+                                    style={{
+                                        margin: "20px",
+                                        borderRadius: "200px",
+                                    }}
+                                >
+                                    <input
+                                        onChange={handleChange}
+                                        value={item.value}
+                                        id={i}
+                                        type={item.type}
+                                        size="40"
+                                    />
+                                </div>
+                            )
+                        })}
                 </div>
                 <div>Enable Group Withdrawal?</div>
                 <label style={switchStyles}>
