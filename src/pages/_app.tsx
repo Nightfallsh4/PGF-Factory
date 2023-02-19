@@ -20,7 +20,8 @@ export default function App({ Component, pageProps }) {
         // useContext(BiconomyContext) to get the account, socialLoginSDK, provider, smart account, connectWeb3 and disconnectWeb3 inside any component
         <BiconomyContextProvider>
             <Component {...pageProps} />
-            <CreateCampaign/>
+            <Land/>
+            {/* <CreateCampaign/> */}
         </BiconomyContextProvider>
     )
 }
