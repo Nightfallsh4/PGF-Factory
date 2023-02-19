@@ -13,7 +13,7 @@ import { useAccount } from "wagmi"
 
 function CreateCampaign() {
     const [isLoading, setIsLoading] = useState(false)
-
+    // const navigate = useNavigate();
     const [isOn, setIsOn] = useState(false)
 
     const handleCchange = () => {
@@ -61,6 +61,7 @@ function CreateCampaign() {
     }
 
     const { address } = useAccount()
+const [image, setImage] = useState("")
 
     const [form, setForm] = useState({
         name: "",
@@ -79,12 +80,12 @@ function CreateCampaign() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        checkIfImage(form.image, async (exists) => {
+        checkIfImage(image, async (exists) => {
             if (exists) {
                 setIsLoading(true)
                 // await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
                 setIsLoading(false)
-                navigate("/")
+                // navigate("/")
             } else {
                 alert("Provide valid image URL")
                 setForm({ ...form, image: "" })
@@ -95,7 +96,6 @@ function CreateCampaign() {
 
     const [arr, setArr] = useState(inputArr)
     const [clicked, setClicked] = useState(false)
-const [image, setImage] = useState(null)
 
 const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -227,11 +227,35 @@ const handleImageChange = (event) => {
                 </div>
 
                 <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-white-300 px-6 pt-5 pb-6">
-                    <div>
-                        <input type="file" onChange={handleImageChange} />
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                        }}
+                    >
+                        <input
+                            type="file"
+                            onChange={handleImageChange}
+                            handleChange={(e) => handleFormFieldChange("target", e)}
+                            style={{ marginBottom: "10px" }}
+                        />
                         {image && (
-                            <div>
-                                <img src={image} alt="uploaded image" />
+                            <div
+                                style={{
+                                    border: "1px solid black",
+                                    padding: "10px",
+                                    marginTop: "10px",
+                                }}
+                            >
+                                <img
+                                    src={image}
+                                    alt="uploaded image"
+                                    style={{
+                                        maxWidth: "300px",
+                                        maxHeight: "300px",
+                                    }}
+                                />
                             </div>
                         )}
                     </div>
@@ -262,6 +286,7 @@ const handleImageChange = (event) => {
 
                 <div className="flex justify-center items-center mt-[40px]">
                     <CustomButton
+                        
                         totalFunding={form.target}
                         withdrawalFee={form.fees}
                         whitelisted={arr}
