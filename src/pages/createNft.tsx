@@ -49,9 +49,9 @@ export default function createnft() {
   const navigation = [
 
   { name: 'Fund Public Contracts', href:'/' , current: false },
-  { name: 'Create your own Contract',href:'/CreateCampaign' , current: false },
+  { name: 'Create your own Contract',href:'/create' , current: false },
     { name: 'My Funded Contracts',href:'/myNfts' , current: false },
-    { name: 'Social Login', href:'/', current: true }
+    { name: 'Social Login', current: true }
 ]
 
 function classNames(...classes) {
@@ -190,8 +190,8 @@ return (
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-blue-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current ? 'bg-blue-900 px-12 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'px-12 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
@@ -278,7 +278,7 @@ return (
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    item.current ? 'bg-red-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block px-3 py-2 rounded-md text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}

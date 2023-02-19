@@ -7,7 +7,7 @@ import "@biconomy/web3-auth/dist/src/style.css"
 // import CampaignDetails from "./CampaignDetails";
 import CreateCampaign from "./create"
 import Homee from "./Home"
-import { FundCard } from "./components"
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayCampaigns from "./DisplayCampaigns"
 import Land from "./Land"

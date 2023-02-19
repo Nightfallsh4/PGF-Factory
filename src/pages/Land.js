@@ -66,7 +66,7 @@ function Land() {
                             </svg>
                         </button>
                     </div>
-                    <div className="hidden lg:flex lg:gap-x-12">
+                    {/* <div className="hidden lg:flex lg:gap-x-12">
                         <a
                             href="/create"
                             className="text-sm font-semibold leading-6 text-gray-900"
@@ -87,7 +87,7 @@ function Land() {
                         >
                             My Funded Contracts
                         </a>
-                    </div>
+                    </div> */}
                     {!smartAccount ? (
                         <div
                             className="hidden lg:flex lg:flex-1 lg:justify-end"
@@ -155,7 +155,7 @@ function Land() {
                                 </svg>
                             </button>
                         </div>
-                        <div className="mt-6 flow-root">
+                        {/* <div className="mt-6 flow-root">
                             <div className="-my-6 divide-y divide-gray-500/10">
                                 <div className="space-y-2 py-6">
                                     <a
@@ -188,7 +188,7 @@ function Land() {
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
