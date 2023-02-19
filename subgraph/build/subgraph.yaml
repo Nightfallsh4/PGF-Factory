@@ -1,0 +1,51 @@
+specVersion: 0.0.4
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: PGFFactory
+    network: mumbai
+    source:
+      address: "0xA062E89e79668b873004Bf60c588C899289D4166"
+      abi: PGFFactory
+      startBlock: 32161911
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Funding
+        - Token
+        - User
+      abis:
+        - name: PGFFactory
+          file: PGFFactory/abis/PGFFactory.json
+        - name: FundingContract
+          file: PGFFactory/abis/FundingContract.json
+      eventHandlers:
+        - event: FundingCreated(indexed address,indexed uint256,indexed uint256,uint256)
+          handler: handleFundingCreated
+      file: PGFFactory/PGFFactory.wasm
+templates:
+  - kind: ethereum
+    name: FundingContract
+    network: mumbai
+    source:
+      abi: FundingContract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Funding
+        - Token
+        - User
+      abis:
+        - name: FundingContract
+          file: FundingContract/abis/FundingContract.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+        - event: FundsDeposited(indexed uint256,indexed address,indexed uint256)
+          handler: handleDeposit
+      file: PGFFactory/PGFFactory.wasm

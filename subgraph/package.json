@@ -1,0 +1,18 @@
+{
+  "name": "pgffactory",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ nightfallsh4/pgffactory",
+    "create-local": "graph create --node http://localhost:8020/ nightfallsh4/pgffactory",
+    "remove-local": "graph remove --node http://localhost:8020/ nightfallsh4/pgffactory",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 nightfallsh4/pgffactory",
+    "test": "graph test"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.33.1",
+    "@graphprotocol/graph-ts": "0.27.0"
+  },
+  "devDependencies": { "matchstick-as": "0.5.0" }
+}

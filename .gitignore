@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-
+subgraph/node_modules
 # testing
 /coverage
 
@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.opezeppelin/
+artifacts/
+bin/
+cache/
+
+.openzeppelin
+artifacts
+cache
+bin
