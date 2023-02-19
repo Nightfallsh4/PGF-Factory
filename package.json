@@ -13,6 +13,8 @@
         "@biconomy/web3-auth": "^1.0.0",
         "@headlessui/react": "^1.7.10",
         "@heroicons/react": "^2.0.15",
+        "@mui/material": "^5.11.9",
+        "@mui/styled-engine-sc": "^5.11.9",
         "@next/font": "13.1.6",
         "@nomiclabs/hardhat-waffle": "^2.0.3",
         "@openzeppelin/contracts": "^4.8.1",
