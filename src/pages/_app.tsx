@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 // import type { AppProps } from "next/app"
 import dynamic from "next/dynamic"
 import CreateNFT from "./createNft"
+import "@biconomy/web3-auth/dist/src/style.css"
 // import CampaignDetails from "./CampaignDetails";
 import CreateCampaign from "./create"
 import Homee from "./Home"
@@ -11,10 +12,7 @@ import { FundCard } from "./components"
 import DisplayCampaigns from "./DisplayCampaigns"
 import Land from "./Land"
 const BiconomyContextProvider = dynamic(
-    () => import("../contexts/BiconomyContext"),
-    {
-        ssr: false,
-    }
+    () => import("../contexts/BiconomyContext"),{ssr:false}
 )
 
 export default function App({ Component, pageProps }) {
