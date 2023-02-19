@@ -7,8 +7,8 @@ import { ethers } from "ethers"
 import { CustomButton, FormField, Loader } from "../components"
 import { checkIfImage } from "./utils/util"
 
-const CreateCampaign = () => {
-    const navigate = useNavigate()
+function CreateCampaign () {
+    
     const [isLoading, setIsLoading] = useState(false)
 
     const [form, setForm] = useState({
@@ -26,7 +26,7 @@ const CreateCampaign = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+z
         checkIfImage(form.image, async (exists) => {
             if (exists) {
                 setIsLoading(true)
@@ -41,7 +41,8 @@ const CreateCampaign = () => {
     }
 
     return (
-        <div className="bg-gradient-to-r from-blue-400 to-emerald-400 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4">
+        <div className="bg-gradient-to-r from-blue-400 to-emerald-400 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4 " style={{marginBottom:"150px",marginRight:"150px", marginLeft:"150px",marginTop:"50px",  borderColor: "#9ecaed" ,
+    boxShadow: "0 0 100px black"}}>
             {isLoading && <Loader />}
             <h1
                 style={{
@@ -110,10 +111,10 @@ const CreateCampaign = () => {
                     />
                 </div>
 
-                <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-white-300 px-6 pt-5 pb-6">
                     <div class="space-y-1 text-center">
                         <svg
-                            class="mx-auto h-12 w-12 text-gray-400"
+                            class="mx-auto h-12 w-12 text-white-400"
                             stroke="white"
                             fill="none"
                             viewBox="0 0 48 48"
@@ -126,7 +127,7 @@ const CreateCampaign = () => {
                                 stroke-linejoin="round"
                             />
                         </svg>
-                        <div class="flex text-sm text-gray-600">
+                        <div class="flex text-sm text-white-600">
                             <label
                                 for="file-upload"
                                 class="relative cursor-pointer rounded-md py-1 px-2 bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
@@ -141,7 +142,7 @@ const CreateCampaign = () => {
                             </label>
                             <p class="pl-1">or drag and drop</p>
                         </div>
-                        <p class="text-xs text-gray-500">
+                        <p class="text-xs text-white-500">
                             PNG, JPG, GIF up to 10MB
                         </p>
                     </div>
