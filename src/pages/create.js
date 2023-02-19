@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ethers } from "ethers"
+
 import { ToggleSwitch } from "./components"
+
 // import { useStateContext } from '../context';
 // import { money } from '../assets';
 import { CustomButton, FormField, Loader } from "../components"
@@ -11,6 +13,7 @@ import { useAccount } from "wagmi"
 
 function CreateCampaign() {
     const [isLoading, setIsLoading] = useState(false)
+
     const [isOn, setIsOn] = useState(false)
 
     const handleCchange = () => {
@@ -72,6 +75,7 @@ function CreateCampaign() {
         setForm({ ...form, [fieldName]: e.target.value })
     }
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -92,8 +96,8 @@ function CreateCampaign() {
     const [arr, setArr] = useState(inputArr)
     const [clicked, setClicked] = useState(false)
 
+
     const addInput = () => {
-        setClicked(true)
         setArr((s) => {
             return [
                 ...s,
@@ -117,9 +121,24 @@ function CreateCampaign() {
         })
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        // checkIfImage(form.image, async (exists) => {
+        //     if (exists) {
+        //         setIsLoading(true)
+        //         // await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+        //         setIsLoading(false)
+        //         navigate("/")
+        //     } else {
+        //         alert("Provide valid image URL")
+        //         setForm({ ...form, image: "" })
+        //     }
+        // })
+    }
+
     return (
         <div
-            className="bg-gradient-to-r from-green-400 to-blue-500 flex justify-center items-center flex-col rounded-[25px] sm:p-10 p-4 "
+            className="bg-gradient-to-r from-blue-400 to-emerald-400 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4 "
             style={{
                 marginBottom: "150px",
                 marginRight: "150px",
@@ -129,40 +148,15 @@ function CreateCampaign() {
                 boxShadow: "0 0 100px black",
             }}
         >
-            <div className="absolute  top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
-                <svg
-                    className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
-                    viewBox="0 0 1155 678"
-                >
-                    <path
-                        fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
-                        fill-opacity=".3"
-                        d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-                    />
-                    <defs>
-                        <linearGradient
-                            id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
-                            x1="1155.49"
-                            x2="-78.208"
-                            y1=".177"
-                            y2="474.645"
-                            gradientUnits="userSpaceOnUse"
-                        >
-                            <stop stop-color="green" />
-                            <stop offset="1" stop-color="green" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
             {isLoading && <Loader />}
             <h1
                 style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "50px",
+                    fontSize: "70px",
                 }}
-                className="text-bold-100 font-semibold"
+                className="text-slate-100 font-semibold"
             >
                 Create A Funding Contract
             </h1>
@@ -172,7 +166,7 @@ function CreateCampaign() {
 
             <form
                 onSubmit={handleSubmit}
-                className=" mt-[15px] flex flex-col gap-[10px]"
+                className="w-full mt-[65px] flex flex-col gap-[30px]"
             >
                 <div className="flex flex-wrap gap-[40px]">
                     <FormField
@@ -200,6 +194,13 @@ function CreateCampaign() {
                         handleFormFieldChange("description", e)
                     }
                 />
+
+                <div className="w-full flex justify-start items-center p-4 bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800 h-[120px] rounded-[10px]">
+                    {/* <img src={money} alt="money" className="w-[40px] h-[40px] object-contain"/> */}
+                    <h4 className="font-epilogue text-2xl text-white ml-[20px]">
+                        Each Contract Funder can fund 10% of the Contract Amount
+                    </h4>
+                </div>
 
                 <div className="flex flex-wrap gap-[40px]">
                     <FormField
@@ -234,13 +235,10 @@ function CreateCampaign() {
                                 stroke-linejoin="round"
                             /> */}
                         </svg>
-                        <div
-                            class="flex text-sm text-white-600"
-                            style={{ borderColor: "black" }}
-                        >
+                        <div class="flex text-sm text-white-600">
                             <label
                                 for="file-upload"
-                                class="relative cursor-pointer rounded-md py-1 px-2 bg-black font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                                class="relative cursor-pointer rounded-md py-1 px-2 bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                             >
                                 <span>Upload a file</span>
                                 <input
@@ -252,62 +250,42 @@ function CreateCampaign() {
                             </label>
                             <p class="pl-1">or drag and drop</p>
                         </div>
-
                         <p class="text-xs text-white-500">
                             PNG, JPG, GIF up to 10MB
                         </p>
                     </div>
                 </div>
-                <div className="w-full flex justify-start items-center p-4 bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800 h-[120px] rounded-[10px]">
-                    {/* <img src={money} alt="money" className="w-[40px] h-[40px] object-contain"/> */}
-                    <h4 className="font-epilogue text-2xl text-white ml-[20px]">
-                        Each Contract Funder can fund 10% of the Contract Amount
-                    </h4>
-                </div>
-
                 <div>
-                    <button
-                        type="button"
-                        class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                        onClick={addInput}
-                    >
-                        Add Whitelisted addressess here
+                    <button onClick={addInput}>
+                        Add WhiteListed Addressess?
                     </button>
-                    {clicked &&
-                        arr.map((item, i) => {
-                            return (
-                                <div
-                                    style={{
-                                        margin: "20px",
-                                        borderRadius: "200px",
-                                    }}
-                                >
-                                    <input
-                                        onChange={handleChange}
-                                        value={item.value}
-                                        id={i}
-                                        type={item.type}
-                                        size="40"
-                                    />
-                                </div>
-                            )
-                        })}
+                    {arr.map((item, i) => {
+                        return (
+                            <div
+                                style={{
+                                    margin: "20px",
+                                    borderRadius: "200px",
+                                }}
+                            >
+                                <input
+                                    onChange={handleChange}
+                                    value={item.value}
+                                    id={i}
+                                    type={item.type}
+                                    size="40"
+                                />
+                            </div>
+                        )
+                    })}
                 </div>
-                <div>Enable Group Withdrawal?</div>
-                <label style={switchStyles}>
-                    <input
-                        type="checkbox"
-                        checked={isOn}
-                        onChange={handleCchange}
-                        style={inputStyles}
-                    />
-                    <span style={sliderStyles}>
-                        <span style={roundStyles}> </span>
-                    </span>
-                </label>
 
                 <div className="flex justify-center items-center mt-[40px]">
                     <CustomButton
+                        totalFunding={form.target}
+                        withdrawalFee={form.fees}
+                        whitelisted={arr}
+                        months={form.months}
+                        tokenUri="github.com/nightfallsh4"
                         btnType="submit"
                         title="Submit new campaign"
                         styles="bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800"
