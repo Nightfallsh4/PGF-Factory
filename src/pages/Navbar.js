@@ -36,6 +36,12 @@ function Navbar() {
                         href="/"
                         className="text-sm font-semibold leading-6 text-gray-900"
                     >
+                        Home
+                    </Link>
+                    <Link
+                        href="/listed-contracts"
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                    >
                         Listed Contracts
                     </Link>
 

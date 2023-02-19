@@ -2,12 +2,12 @@ import { useAccount } from "wagmi"
 import NFTCard from "../components/NFTCard"
 import PushSupportChat from "../../notifications/supportChat"
 
-export default function MyFundingContract() {
-    const { address } = useAccount()
+export default function ListedContracts() {
+    const { address, isConnected } = useAccount()
 
     return (
         <>
-            {address ? (
+            {isConnected ? (
                 <div>
                     <div>
                         <PushSupportChat userAddress={address} />
@@ -23,7 +23,7 @@ export default function MyFundingContract() {
                             nftTitle={"Sofa Contract"}
                             funding={"0.03"}
                             duration={"3"}
-                            isListed={false}
+                            isListed={true}
                         />
                     </div>
                 </div>

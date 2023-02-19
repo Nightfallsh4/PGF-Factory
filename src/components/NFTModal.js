@@ -24,10 +24,14 @@ export default function NFTModal({
     funding,
     duration,
     nftDetails,
+    isListed,
 }) {
     const { address } = useAccount()
     const withDrawBtnHandler = async () => {
         /** TODO */
+    }
+    const fundBtnHandler = async () => {
+        /**TODO */
     }
     return (
         <>
@@ -78,28 +82,50 @@ export default function NFTModal({
                                         {funding}
                                     </Text>
                                 </Flex>
-
-                                <Flex align={"center"} justify={"left"}>
-                                    <Text marginEnd={3}>Days Left:</Text>
-                                    <Text fontWeight={"semibold"}>
-                                        {duration}
-                                    </Text>
-                                </Flex>
+                                {isListed ? (
+                                    <Flex align={"center"} justify={"left"}>
+                                        <Text marginEnd={3}>Duration:</Text>
+                                        <Text fontWeight={"semibold"}>
+                                            {duration} Months
+                                        </Text>
+                                    </Flex>
+                                ) : (
+                                    <Flex align={"center"} justify={"left"}>
+                                        <Text marginEnd={3}>Days Left:</Text>
+                                        <Text fontWeight={"semibold"}>
+                                            {duration}
+                                        </Text>
+                                    </Flex>
+                                )}
                             </Flex>
                         </Stack>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button
-                            colorScheme="red"
-                            mr={3}
-                            onClick={async () => {
-                                await withDrawBtnHandler()
-                                onClose
-                            }}
-                        >
-                            Withdraw
-                        </Button>
+                        {isListed ? (
+                            <Button
+                                colorScheme="green"
+                                mr={3}
+                                onClick={async () => {
+                                    await fundBtnHandler()
+                                    onClose
+                                }}
+                            >
+                                Fund
+                            </Button>
+                        ) : (
+                            <Button
+                                colorScheme="red"
+                                mr={3}
+                                onClick={async () => {
+                                    await withDrawBtnHandler()
+                                    onClose
+                                }}
+                            >
+                                Withdraw
+                            </Button>
+                        )}
+
                         <Button variant="ghost" onClick={onClose}>
                             Cancel
                         </Button>
