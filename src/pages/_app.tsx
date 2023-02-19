@@ -9,7 +9,7 @@ import Homee from "./Home"
 import { FundCard } from "./components"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayCampaigns from "./DisplayCampaigns"
-import Land from './Land'
+import Land from "./Land"
 const BiconomyContextProvider = dynamic(
     () => import("../contexts/BiconomyContext"),
     {
@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
     return (
         // useContext(BiconomyContext) to get the account, socialLoginSDK, provider, smart account, connectWeb3 and disconnectWeb3 inside any component
         <BiconomyContextProvider>
-            <Land />
+            <Component {...pageProps} />
             {/* <CreateCampaign/> */}
         </BiconomyContextProvider>
     )
