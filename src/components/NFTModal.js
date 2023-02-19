@@ -13,8 +13,13 @@ import {
     Avatar,
     Flex,
 } from "@chakra-ui/react"
+import { useContractWrite, usePrepareContractWrite, useSigner } from "wagmi"
+import { ethers } from "ethers"
+import fundingAbi from "../../deployments/fundingContract.json"
 
 import { useAccount } from "wagmi"
+import { makeRoot } from "../pages/utils/merkleTree"
+import keccak256 from "keccak256"
 
 export default function NFTModal({
     isOpen,
@@ -26,12 +31,37 @@ export default function NFTModal({
     nftDetails,
     isListed,
 }) {
+    const { tree, root } = makeRoot([
+        "0xB721347D2938a5594a12DF5Cc36D598b839Cb98f",
+        "0xcB399226a65DF8964482daA5B1CB98478493CC4d",
+    ])
+    const { data: signData, signer } = useSigner()
+
     const { address } = useAccount()
+    const proof = tree.getHexProof(keccak256(address))
+    const { data, isLoading, isSuccess, write, error, isError } =
+        useContractWrite({
+            address: "0x30062bbb14cc9f8ff615f579dc48af692e928570",
+            abi: fundingAbi.abi,
+            functionName: "depositFunds",
+            args: [proof],
+            overrides: {
+                value: ethers.utils.parseEther("0.001"),
+            },
+            chainId: 80001,
+            onSuccess(data) {
+                console.log(data.hash)
+                setHash(data.hash)
+            },
+        })
     const withDrawBtnHandler = async () => {
         /** TODO */
     }
     const fundBtnHandler = async () => {
         /**TODO */
+        console.log(proof)
+        console.log(root);
+        write?.()
     }
     return (
       <div >
