@@ -6,11 +6,7 @@ import { CircularProgress } from "@mui/material"
 function Land() {
     const { connectWeb3, disconnectWeb3, account, smartAccount } = useContext(BiconomyContext)
     const [isClicked, setIsClicked] = useState(false)
-    async function connect() {
-        setIsClicked(true)
-        await connectWeb3()
-        setIsClicked(false)
-    }
+z
     return (
         <div className=" bg-red">
             <div className="absolute  top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
