@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ConnectButton } from "@rainbow-me/rainbowkit"
     function Navbar() {
   return (
-      <div style={{padding:"30px"}}>
+      <div style={{ padding: "30px" }}>
           <nav
               className="flex items-center justify-between"
               aria-label="Global"
@@ -34,21 +34,21 @@ import { ConnectButton } from "@rainbow-me/rainbowkit"
               <div className="hidden lg:flex lg:gap-x-12">
                   <Link
                       href="/NFTCard"
-                      className="text-sm font-semibold leading-6 text-gray-900"
+                      className="text-xl font-semibold leading-6 text-gray-900"
                   >
                       Listed Contracts
                   </Link>
 
                   <Link
                       href="/create"
-                      className="text-sm font-semibold leading-6 text-gray-900"
+                      className="text-xl font-semibold leading-6 text-gray-900"
                   >
-                      Create Contract
+                      <button type="button" >Create Contract</button>
                   </Link>
 
                   <a
                       href="#"
-                      className="text-sm font-semibold leading-6 text-gray-900"
+                      className="text-xl font-semibold leading-6 text-gray-900"
                   >
                       My Funded Contracts
                   </a>
