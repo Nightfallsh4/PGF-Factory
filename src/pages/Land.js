@@ -58,7 +58,7 @@ function Land() {
                   </div>
                   <div className="hidden lg:flex lg:gap-x-12">
                       <a
-                          href="#"
+                          href="/create"
                           className="text-sm font-semibold leading-6 text-gray-900"
                       >
                           Listed Contracts
