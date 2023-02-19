@@ -11,16 +11,21 @@ import { FundCard } from "./components"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayCampaigns from "./DisplayCampaigns"
 import Land from "./Land"
+import { ChakraProvider } from "@chakra-ui/react"
+
 const BiconomyContextProvider = dynamic(
-    () => import("../contexts/BiconomyContext"),{ssr:false}
+    () => import("../contexts/BiconomyContext"),
+    { ssr: false }
 )
 
 export default function App({ Component, pageProps }) {
     return (
         // useContext(BiconomyContext) to get the account, socialLoginSDK, provider, smart account, connectWeb3 and disconnectWeb3 inside any component
         <BiconomyContextProvider>
-            <Component {...pageProps} />
-            <CreateCampaign/>
+            <ChakraProvider>
+                <Component {...pageProps} />
+            </ChakraProvider>
+            {/* <CreateCampaign/> */}
         </BiconomyContextProvider>
     )
 }
