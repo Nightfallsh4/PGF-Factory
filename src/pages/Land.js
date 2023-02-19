@@ -3,7 +3,8 @@ import React, { useContext, useState } from "react"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Link from "next/link"
 // import { BiconomyContext } from "@/contexts/BiconomyContext"
-import { CircularProgress } from "@mui/material"
+import PushSupportChat from "../../notifications/supportChat"
+import { useAccount } from "wagmi"
 function Land() {
     // const { connectWeb3, disconnectWeb3, account, smartAccount } =
     //     useContext(BiconomyContext)
@@ -13,6 +14,7 @@ function Land() {
     //     // await connectWeb3()
     //     setIsClicked(false)
     // }
+    const { address } = useAccount()
     return (
         <div className=" bg-red">
             <div className="absolute  top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
@@ -41,8 +43,6 @@ function Land() {
                 </svg>
             </div>
             <div className="px-6 pt-6 lg:px-8">
-                
-
                 <div role="dialog" aria-modal="true">
                     <div
                         focus="true"
@@ -123,18 +123,21 @@ function Land() {
                             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                                 Build Trust With Us
                             </h1>
+                            <div>
+                                <PushSupportChat userAddress={address} />
+                            </div>
                             <p className="mt-6 text-lg leading-8 text-gray-600">
                                 A Public Goods Funding Product to help build
                                 trust among entities
                             </p>
                             <div className="mt-10 flex items-center justify-center gap-x-6">
-                                <a
-                                    href="/CreateCampaign"
+                                <Link
+                                    href="/create"
                                     className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 >
                                     Create Your Own Contracts Now{" "}
                                     <span aria-hidden="true">→</span>
-                                </a>
+                                </Link>
                                 <a
                                     href="#"
                                     className="text-base font-semibold leading-7 text-gray-900"

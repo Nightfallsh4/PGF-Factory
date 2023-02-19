@@ -2,13 +2,66 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ethers } from "ethers"
 
+import { ToggleSwitch } from "./components"
+
 // import { useStateContext } from '../context';
 // import { money } from '../assets';
 import { CustomButton, FormField, Loader } from "../components"
 import { checkIfImage } from "./utils/util"
+import PushSupportChat from "../../notifications/supportChat"
+import { useAccount } from "wagmi"
 
 function CreateCampaign() {
     const [isLoading, setIsLoading] = useState(false)
+
+    const [isOn, setIsOn] = useState(false)
+
+    const handleCchange = () => {
+        setIsOn(!isOn)
+    }
+    const switchStyles = {
+        float: "right",
+        position: "relative",
+        display: "inline-block",
+        width: "60px",
+        height: "34px",
+    }
+
+    const inputStyles = {
+        opacity: 0,
+        width: 0,
+        height: 0,
+    }
+
+    const sliderStyles = {
+        position: "absolute",
+        cursor: "pointer",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "#ccc",
+        transition: "0.4s",
+    }
+
+    const roundStyles = {
+        position: "absolute",
+        content: '""',
+        height: "26px",
+        width: "26px",
+        left: "4px",
+        bottom: "4px",
+        backgroundColor: "white",
+        transition: "0.4s",
+    }
+
+    if (isOn) {
+        sliderStyles.backgroundColor = "#2196F3"
+        roundStyles.transform = "translateX(26px)"
+    }
+
+    const { address } = useAccount()
+
     const [form, setForm] = useState({
         name: "",
         months: "",
@@ -21,15 +74,28 @@ function CreateCampaign() {
     const handleFormFieldChange = (fieldName, e) => {
         setForm({ ...form, [fieldName]: e.target.value })
     }
-    const inputArr = [
-        {
-            type: "text",
-            id: 1,
-            value: "",
-        },
-    ]
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        checkIfImage(form.image, async (exists) => {
+            if (exists) {
+                setIsLoading(true)
+                // await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+                setIsLoading(false)
+                navigate("/")
+            } else {
+                alert("Provide valid image URL")
+                setForm({ ...form, image: "" })
+            }
+        })
+    }
+    const inputArr = []
 
     const [arr, setArr] = useState(inputArr)
+    const [clicked, setClicked] = useState(false)
+
 
     const addInput = () => {
         setArr((s) => {
@@ -94,6 +160,9 @@ function CreateCampaign() {
             >
                 Create A Funding Contract
             </h1>
+            <div>
+                <PushSupportChat userAddress={address} />
+            </div>
 
             <form
                 onSubmit={handleSubmit}
