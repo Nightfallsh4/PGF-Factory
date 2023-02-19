@@ -218,14 +218,14 @@ function CreateCampaign() {
                 </div>
 
                 <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-white-300 px-6 pt-5 pb-6">
-                    <div>
+                    {/* <div>
                         <input type="file" onChange={handleImageChange} />
                         {image && (
                             <div>
                                 <img src={image} alt="uploaded image" />
                             </div>
                         )}
-                    </div>
+                    </div> */}
                 </div>
                 <div>
                     <button onClick={addInput}>

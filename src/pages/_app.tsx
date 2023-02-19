@@ -25,6 +25,7 @@ import {
     polygonMumbai,
 } from "wagmi/chains"
 // import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { NotificationProvider } from "@web3uikit/core"
 import { publicProvider } from "wagmi/providers/public"
 // const BiconomyContextProvider = dynamic(
 //     () => import("../contexts/BiconomyContext"),
@@ -52,17 +53,17 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }) {
     return (
-       
-        
         // useContext(BiconomyContext) to get the account, socialLoginSDK, provider, smart account, connectWeb3 and disconnectWeb3 inside any component
         <WagmiConfig client={wagmiClient}>
             <RainbowKitProvider chains={chains}>
                 <ChakraProvider>
-                    <Navbar/>
-                    {/* <BrowserRouter>
+                    <NotificationProvider>
+                        <Navbar />
+                        {/* <BrowserRouter>
                         <CreateNFT />
                         </BrowserRouter> */}
-                    <Component {...pageProps} />
+                        <Component {...pageProps} />
+                    </NotificationProvider>
                 </ChakraProvider>
             </RainbowKitProvider>
         </WagmiConfig>
