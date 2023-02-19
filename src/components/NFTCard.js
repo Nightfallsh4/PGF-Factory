@@ -20,6 +20,7 @@ export default function NFTCard({
     nftTitle,
     duration,
     nftDetails,
+    isListed,
 }) {
     const { isOpen, onClose, onOpen } = useDisclosure()
     return (
@@ -32,6 +33,7 @@ export default function NFTCard({
                 funding={funding}
                 duration={duration}
                 nftDetails={nftDetails}
+                isListed={isListed}
             />
             <Card maxW="sm" size={"sm"}>
                 <CardBody>
@@ -52,11 +54,17 @@ export default function NFTCard({
                                 fontSize="lg"
                                 fontWeight={"semibold"}
                             >
-                                {funding}
+                                {funding} ETH
                             </Text>
-                            <Text color={"gray.600"} fontSize="md">
-                                {duration} days left
-                            </Text>
+                            {isListed ? (
+                                <Text color={"gray.600"} fontSize="md">
+                                    {duration} Months
+                                </Text>
+                            ) : (
+                                <Text color={"gray.600"} fontSize="md">
+                                    {duration} days left
+                                </Text>
+                            )}
                         </Flex>
                     </Stack>
                 </CardBody>
