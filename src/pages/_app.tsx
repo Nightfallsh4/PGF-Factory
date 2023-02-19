@@ -4,10 +4,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import dynamic from "next/dynamic"
 import CreateNFT from "./createNft"
 // import CampaignDetails from "./CampaignDetails";
-import CreateCampaign from "./CreateCampaign"
+import CreateCampaign from "./create"
 import Homee from "./Home"
 import { FundCard } from "./components"
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayCampaigns from "./DisplayCampaigns"
+import Land from './Land'
 const BiconomyContextProvider = dynamic(
     () => import("../contexts/BiconomyContext"),
     {
@@ -19,18 +21,8 @@ export default function App({ Component, pageProps }) {
     return (
         // useContext(BiconomyContext) to get the account, socialLoginSDK, provider, smart account, connectWeb3 and disconnectWeb3 inside any component
         <BiconomyContextProvider>
-            <BrowserRouter>
-                <CreateNFT />
-                <div>
-                    <Routes>
-                        {/* <CreateNFT /> */}
-                        {/* <Route path="/" element={<Homee />} /> */}
-                        {/* <Route path="myNfts" element={<Profile />} /> */}
-                        <Route path="/" element={<CreateCampaign />} />
-                        {/* <Route path="/contract-details/:id" element={<CampaignDetails/>} /> */}
-                    </Routes>
-                </div>
-            </BrowserRouter>
+            {/* <Land /> */}
+            <CreateCampaign/>
         </BiconomyContextProvider>
     )
 }
