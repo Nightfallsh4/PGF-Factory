@@ -36,7 +36,7 @@ const CustomButton = (params) => {
     params.whitelisted.forEach((element) => {
         addresses.push(element.value)
     })
-    const { tree, root } = makeRoot(addresses || ["sc", "dsjf"])
+    const { tree, root } = makeRoot(addresses || ["0xcB399226a65DF8964482daA5B1CB98478493CC4d","0xB721347D2938a5594a12DF5Cc36D598b839Cb98f"])
     const { data: signData, signer } = useSigner()
     // const { config } = usePrepareContractWrite({
     //     address: "0xA062E89e79668b873004Bf60c588C899289D4166",
