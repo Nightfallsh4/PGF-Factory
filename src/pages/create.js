@@ -61,7 +61,7 @@ function CreateCampaign() {
     }
 
     const { address } = useAccount()
-const [image, setImage] = useState("")
+    const [image, setImage] = useState("")
 
     const [form, setForm] = useState({
         name: "",
@@ -90,20 +90,19 @@ const [image, setImage] = useState("")
         //         setForm({ ...form, image: "" })
         //     }
         // })
-
     }
     const inputArr = []
 
     const [arr, setArr] = useState(inputArr)
     const [clicked, setClicked] = useState(false)
 
-const handleImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-        const selectedImage = event.target.files[0]
-        setImage(URL.createObjectURL(selectedImage))
-        setForm({ ...form, image: event.target.value })
+    const handleImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            const selectedImage = event.target.files[0]
+            setImage(URL.createObjectURL(selectedImage))
+            setForm({ ...form, image: event.target.value })
+        }
     }
-}
 
     const addInput = () => {
         setArr((s) => {
@@ -130,18 +129,18 @@ const handleImageChange = (event) => {
     }
 
     // const handleSubmit = async (e) => {
-        // e.preventDefault()
-        // checkIfImage(form.image, async (exists) => {
-        //     if (exists) {
-        //         setIsLoading(true)
-        //         // await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
-        //         setIsLoading(false)
-        //         navigate("/")
-        //     } else {
-        //         alert("Provide valid image URL")
-        //         setForm({ ...form, image: "" })
-        //     }
-        // })
+    // e.preventDefault()
+    // checkIfImage(form.image, async (exists) => {
+    //     if (exists) {
+    //         setIsLoading(true)
+    //         // await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+    //         setIsLoading(false)
+    //         navigate("/")
+    //     } else {
+    //         alert("Provide valid image URL")
+    //         setForm({ ...form, image: "" })
+    //     }
+    // })
 
     // }
 
@@ -229,7 +228,7 @@ const handleImageChange = (event) => {
                 </div>
 
                 <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-white-300 px-6 pt-5 pb-6">
-                    {/* <div
+                    <div
                         style={{
                             display: "flex",
                             flexDirection: "column",
@@ -239,7 +238,9 @@ const handleImageChange = (event) => {
                         <input
                             type="file"
                             onChange={handleImageChange}
-                            handleChange={(e) => handleFormFieldChange("target", e)}
+                            handleChange={(e) =>
+                                handleFormFieldChange("target", e)
+                            }
                             style={{ marginBottom: "10px" }}
                         />
                         {image && (
@@ -250,7 +251,6 @@ const handleImageChange = (event) => {
                                     marginTop: "10px",
                                 }}
                             >
-                                
                                 <img
                                     src={image}
                                     alt="uploaded image"
@@ -261,7 +261,7 @@ const handleImageChange = (event) => {
                                 />
                             </div>
                         )}
-                    </div>  */}
+                    </div>
                 </div>
                 <div>
                     <button onClick={addInput}>
@@ -289,7 +289,6 @@ const handleImageChange = (event) => {
 
                 <div className="flex justify-center items-center mt-[40px]">
                     <CustomButton
-                        
                         totalFunding={form.target}
                         withdrawalFee={form.fees}
                         whitelisted={arr}
