@@ -24,7 +24,10 @@ export default function NFTCard({
 }) {
     const { isOpen, onClose, onOpen } = useDisclosure()
     return (
-        <>
+        <div
+            style={{ boxShadow: "0 0 20px black" }}
+           
+        >
             <NFTModal
                 isOpen={isOpen}
                 onClose={onClose}
@@ -35,8 +38,9 @@ export default function NFTCard({
                 nftDetails={nftDetails}
                 isListed={isListed}
             />
+
             <Card maxW="sm" size={"sm"}>
-                <CardBody>
+                <CardBody borderRadius="100px">
                     <Image src={nftImage} alt="Token Image" borderRadius="lg" />
 
                     <Stack mt="6" spacing="3">
@@ -82,6 +86,6 @@ export default function NFTCard({
                     </ButtonGroup>
                 </CardFooter>
             </Card>
-        </>
+        </div>
     )
 }

@@ -34,13 +34,13 @@ export default function NFTModal({
         /**TODO */
     }
     return (
-        <>
-            <Modal isOpen={isOpen} onClose={onClose}>
+      <div >
+            <Modal  isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>{nftTitle}</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>
+                    <ModalBody >
                         <Image
                             src={nftImage}
                             alt="Green double couch with wooden legs"
@@ -132,6 +132,6 @@ export default function NFTModal({
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-        </>
+        </div>
     )
 }

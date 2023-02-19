@@ -227,7 +227,7 @@ const handleImageChange = (event) => {
                 </div>
 
                 <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-white-300 px-6 pt-5 pb-6">
-                    <div
+                    {/* <div
                         style={{
                             display: "flex",
                             flexDirection: "column",
@@ -259,7 +259,7 @@ const handleImageChange = (event) => {
                                 />
                             </div>
                         )}
-                    </div> 
+                    </div>  */}
                 </div>
                 <div>
                     <button onClick={addInput}>
