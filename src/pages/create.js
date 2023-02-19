@@ -6,9 +6,13 @@ import { ethers } from "ethers"
 // import { money } from '../assets';
 import { CustomButton, FormField, Loader } from "../components"
 import { checkIfImage } from "./utils/util"
+import PushSupportChat from "../../notifications/supportChat"
+import { useAccount } from "wagmi"
 
 function CreateCampaign() {
     const [isLoading, setIsLoading] = useState(false)
+
+    const { address } = useAccount()
 
     const [form, setForm] = useState({
         name: "",
@@ -95,6 +99,9 @@ function CreateCampaign() {
             >
                 Create A Funding Contract
             </h1>
+            <div>
+                <PushSupportChat userAddress={address} />
+            </div>
 
             <form
                 onSubmit={handleSubmit}
@@ -188,18 +195,25 @@ function CreateCampaign() {
                     </div>
                 </div>
                 <div>
-                    <button onClick={addInput}>Add WhiteListed Addressess?</button>
+                    <button onClick={addInput}>
+                        Add WhiteListed Addressess?
+                    </button>
                     {arr.map((item, i) => {
                         return (
-                            <div style={{margin:"20px", borderRadius:"200px"}}>
-                            <input
-                                onChange={handleChange}
-                                value={item.value}
-                                id={i}
-                                type={item.type}
-                                size="40"
-                            />
-                                </div>
+                            <div
+                                style={{
+                                    margin: "20px",
+                                    borderRadius: "200px",
+                                }}
+                            >
+                                <input
+                                    onChange={handleChange}
+                                    value={item.value}
+                                    id={i}
+                                    type={item.type}
+                                    size="40"
+                                />
+                            </div>
                         )
                     })}
                 </div>
