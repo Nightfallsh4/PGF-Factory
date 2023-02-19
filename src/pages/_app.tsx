@@ -7,13 +7,14 @@ import "@biconomy/web3-auth/dist/src/style.css"
 // import CampaignDetails from "./CampaignDetails";
 import CreateCampaign from "./create"
 import Homee from "./Home"
-import { FundCard } from "./components"
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayCampaigns from "./DisplayCampaigns"
 import Land from "./Land"
+
 import { ChakraProvider } from "@chakra-ui/react"
 import "@rainbow-me/rainbowkit/styles.css"
-
+import Navbar from "./Navbar"
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
 import { configureChains, createClient, WagmiConfig } from "wagmi"
 import {
@@ -51,10 +52,16 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }) {
     return (
+       
+        
         // useContext(BiconomyContext) to get the account, socialLoginSDK, provider, smart account, connectWeb3 and disconnectWeb3 inside any component
         <WagmiConfig client={wagmiClient}>
             <RainbowKitProvider chains={chains}>
                 <ChakraProvider>
+                    <Navbar/>
+                    {/* <BrowserRouter>
+                        <CreateNFT />
+                        </BrowserRouter> */}
                     <Component {...pageProps} />
                 </ChakraProvider>
             </RainbowKitProvider>

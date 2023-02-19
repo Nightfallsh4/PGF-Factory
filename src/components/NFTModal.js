@@ -13,8 +13,8 @@ import {
     Avatar,
     Flex,
 } from "@chakra-ui/react"
-import { BiconomyContext } from "../contexts/BiconomyContext"
-import { useContext } from "react"
+
+import { useAccount } from "wagmi"
 
 export default function NFTModal({
     isOpen,
@@ -25,7 +25,7 @@ export default function NFTModal({
     duration,
     nftDetails,
 }) {
-    const { account } = useContext(BiconomyContext)
+    const { address } = useAccount()
     const withDrawBtnHandler = async () => {
         /** TODO */
     }
@@ -57,9 +57,9 @@ export default function NFTModal({
                                         color={"green.500"}
                                         fontWeight={"bold"}
                                     >
-                                        {account.slice(0, 6) +
+                                        {address.slice(0, 6) +
                                             "..." +
-                                            account.slice(38, 42)}
+                                            address.slice(38, 42)}
                                     </Text>
                                 </Flex>
 
@@ -100,7 +100,9 @@ export default function NFTModal({
                         >
                             Withdraw
                         </Button>
-                        <Button variant="ghost">Cancel</Button>
+                        <Button variant="ghost" onClick={onClose}>
+                            Cancel
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
