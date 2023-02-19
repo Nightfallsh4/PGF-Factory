@@ -7,20 +7,64 @@ import "@biconomy/web3-auth/dist/src/style.css"
 // import CampaignDetails from "./CampaignDetails";
 import CreateCampaign from "./create"
 import Homee from "./Home"
-import { FundCard } from "./components"
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayCampaigns from "./DisplayCampaigns"
 import Land from "./Land"
-const BiconomyContextProvider = dynamic(
-    () => import("../contexts/BiconomyContext"),{ssr:false}
+
+import { ChakraProvider } from "@chakra-ui/react"
+import "@rainbow-me/rainbowkit/styles.css"
+import Navbar from "./Navbar"
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
+import { configureChains, createClient, WagmiConfig } from "wagmi"
+import {
+    mainnet,
+    polygon,
+    optimism,
+    arbitrum,
+    polygonMumbai,
+} from "wagmi/chains"
+// import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from "wagmi/providers/public"
+// const BiconomyContextProvider = dynamic(
+//     () => import("../contexts/BiconomyContext"),
+//     { ssr: false }
+// )
+
+const { chains, provider } = configureChains(
+    [polygonMumbai],
+    [
+        //   alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+        publicProvider(),
+    ]
 )
+
+const { connectors } = getDefaultWallets({
+    appName: "My RainbowKit App",
+    chains,
+})
+
+const wagmiClient = createClient({
+    autoConnect: true,
+    connectors,
+    provider,
+})
 
 export default function App({ Component, pageProps }) {
     return (
+       
+        
         // useContext(BiconomyContext) to get the account, socialLoginSDK, provider, smart account, connectWeb3 and disconnectWeb3 inside any component
-        <BiconomyContextProvider>
-            <Component {...pageProps} />
-            <CreateCampaign/>
-        </BiconomyContextProvider>
+        <WagmiConfig client={wagmiClient}>
+            <RainbowKitProvider chains={chains}>
+                <ChakraProvider>
+                    <Navbar/>
+                    {/* <BrowserRouter>
+                        <CreateNFT />
+                        </BrowserRouter> */}
+                    <Component {...pageProps} />
+                </ChakraProvider>
+            </RainbowKitProvider>
+        </WagmiConfig>
     )
 }

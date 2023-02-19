@@ -29,6 +29,6 @@
         "src/pages/create.js",
         "src/pages/createNft.tsx",
         "test/pgfFactoryContract.test.js"
-    ],
+, "src/components/CustomButton.jsx"    ],
     "exclude": ["node_modules"]
 }
