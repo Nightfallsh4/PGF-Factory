@@ -255,41 +255,11 @@ function CreateCampaign() {
                         </p>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div className="w-full flex justify-start items-center p-4 bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800 h-[120px] rounded-[10px]">
                     {/* <img src={money} alt="money" className="w-[40px] h-[40px] object-contain"/> */}
                     <h4 className="font-epilogue text-2xl text-white ml-[20px]">
                         Each Contract Funder can fund 10% of the Contract Amount
                     </h4>
-=======
-                 <div>
-                        <ToggleSwitch label="Group Withdrwal"/>
-                    </div>
-                <div>
-                   
-                    <button class="btn btn-blue"
-                     
-                        onClick={addInput}>Add WhiteListed Addressess?
-                    </button>
-                    {arr.map((item, i) => {
-                        return (
-                            <div
-                                style={{
-                                    margin: "20px",
-                                    borderRadius: "200px",
-                                }}
-                            >
-                                <input
-                                    onChange={handleChange}
-                                    value={item.value}
-                                    id={i}
-                                    type={item.type}
-                                    size="40"
-                                />
-                            </div>
-                        )
-                    })}
->>>>>>> cced13fb7f9db812f491f4598902f97433fd9296
                 </div>
 
                 <div>
